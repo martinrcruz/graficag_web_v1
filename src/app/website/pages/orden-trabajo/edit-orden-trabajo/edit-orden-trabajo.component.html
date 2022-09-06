@@ -1,0 +1,388 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bread-crumb">
+      <i style="display: inline;" class="fa-solid fa-car-side fa-2xl"></i>
+      <h1 style="display: inline; font-size: 30px;"> Orden de Trabajo / </h1>
+      <h4 style="display: inline; font-size: 20px;">Editar Orden de Trabajo</h4>
+    </div>
+  </div>
+</div>
+<br><br><br>
+<div class="container-fluid contenedor-global">
+  <div class="row">
+
+
+    <div class="container">
+      <div class="row pt-5 pb-5">
+        <div class="col-2"></div>
+
+
+        <div class="col-6" style="margin-right: 0px; padding-right: 0px;">
+          <div class="mb-3" style="text-align: justify;">
+            <i class="fa-solid fa-user" style="padding-right: 15px; padding-left: 15px;"></i>
+            Selecciona un cliente:
+            <div class="client-field">
+
+              <p class="client-name-field">{{ this.cliente.nombre_cliente }}
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="col-2" style="margin-left: 0px; padding-left: 0px; margin-top: 20px;">
+          <button type="button" class="btn btn-primary button"
+            style="padding: 7px 40px 7px 40px; border-radius: 0px 8px 8px 0px; font-size: 25px;"
+            (click)="openSelectCliente()">
+            SELECCIONAR
+          </button>
+
+        </div>
+
+
+        <div class="col-2"></div>
+
+      </div>
+    </div>
+
+
+
+    <div class="container-fluid contenedor-boxes">
+
+      <div class="row contenedor-row flex-nowrap">
+
+        <div class="col-3 box-id">
+          <p class="box-id-title">ID COTIZACION</p>
+          <p class="box-id-subtitle">{{this.orden_trabajo.id}}</p>
+          <div class="box-date">
+            <p class="box-date-fecha"> {{ todayHour }} </p>
+            <p class="box-date-hora"> {{ todayDate }} </p>
+          </div>
+        </div>
+        <div class="col-3 box-info">
+          <p class="box-info-title">Informacion de CLIENTE</p>
+          <div class="box-info-textblock">
+            <p class="box-text">ID Cliente:</p>
+            <p class="box-response"> {{ this.cliente.id_cliente }}</p><br>
+            <p class="box-text">Nombre:</p>
+            <p class="box-response"> {{ this.cliente.nombre_cliente }}</p><br>
+            <p class="box-text">Email:</p>
+            <p class="box-response"> {{ this.cliente.correo }}</p><br>
+            <p class="box-text">Celular:</p>
+            <p class="box-response"> {{ this.cliente.celular }}</p><br>
+          </div>
+        </div>
+        <div class="col-3 box-contact">
+          <p class="box-contact-title">Informacion de EMPRESA </p>
+          <div class="box-contact-textblock">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <p class="box-text">Rut:</p>
+                  <p class="box-response"> {{ this.cliente.rut_empresa }}</p><br>
+                  <p class="box-text">Nombre:</p>
+                  <p class="box-response"> {{ this.cliente.nombre_empresa }}</p><br>
+                  <p class="box-text">Giro:</p>
+                  <p class="box-response"> {{ this.cliente.giro_empresa }}</p><br>
+                  <p class="box-text">Direccion: </p>
+                  <p class="box-response"> {{ this.cliente.direccion_empresa }}</p><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 box-history">
+          <p class="box-history-title"> Informacion Historica </p>
+          <br>
+          <div class="box-history-textblock">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <p class="box-text">Ultima Cotizacion:</p>
+                  <p class="box-response"> {{ this.cliente.ultima_orden_trabajo }}</p><br>
+                  <p class="box-text">Ultima Orden de trabajo:</p>
+                  <p class="box-response"> {{ this.cliente.ultima_orden_trabajo }}</p><br>
+                  <p class="box-text">Saldo adeudado:</p>
+                  <p class="box-response"> {{ this.cliente.saldo_adeudado }}</p><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="container-fluid contenedor-tabla">
+      <div class="row">
+        <div class="col-3">
+          <div class="header">
+            <h1> <strong style="font-size: 25px;">DETALLES COTIZACION</strong> </h1>
+          </div>
+        </div>
+        <div class="col-2 offset-7">
+          <div class="button">
+
+            <button class="btn btn-add" (click)="addDetalleOrdenTrabajo()" style="font-size: 25px;">AGREGAR
+              DETALLE</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="editar" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> EDITAR </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.id_detalle_orden_trabajo}}
+              <a class="btn btn-warning fa-solid fa-pen-to-square" style="color:white;"
+                (click)="updateDetalleOrdenTrabajo(element.id_detalle_orden_trabajo)"></a>
+
+            </td>
+          </ng-container>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id_detalle_orden_trabajo" class="table-head-nombre" style="display:none;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id_detalle_orden_trabajo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="id_producto" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID PRODUCTO </th>
+            <td mat-cell *matCellDef="let element"> {{element.id_producto}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="producto" class="table-head-producto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20% !important;"> PRODUCTO </th>
+            <td mat-cell *matCellDef="let element" style="text-align:start; padding-left: 10px;"> {{element.producto}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="descripcion" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30% !important;"> DESCRIPCION </th>
+            <td mat-cell *matCellDef="let element" style="text-align:start; padding-left: 10px;">
+              {{element.descripcion_producto}}, {{element.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> CANTIDAD </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}} un. </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ancho" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ANCHO </th>
+            <td mat-cell *matCellDef="let element"> {{element.ancho}} cm. </td>
+          </ng-container>
+
+          <ng-container matColumnDef="alto" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ALTO </th>
+            <td mat-cell *matCellDef="let element"> {{element.alto}} cm. </td>
+          </ng-container>
+
+          <ng-container matColumnDef="area" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> AREA </th>
+            <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="terminaciones" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20% !important;"> TERMINACIONES </th>
+            <td mat-cell *matCellDef="let element"> {{element.terminaciones}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipo_valor" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO VALOR </th>
+            <td mat-cell *matCellDef="let element"> {{element.tipo_valor}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_m2" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR M2 </th>
+            <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_m2) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_unidad" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR UN. </th>
+            <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_unidad) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_adicional" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR ADICIONAL </th>
+            <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_adicional) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_total" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR TOTAL </th>
+            <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_total) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="eliminar" class="table-head">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 2% !important; margin: 0px !important">
+              ELIMINAR </th>
+            <td mat-cell *matCellDef="let element">
+              <a class="btn btn-danger fa-solid fa-trash-can" style="color:white; margin: 0px !important;"
+                (click)="deleteDetalleOrdenTrabajo(element.id_detalle_orden_trabajo)"></a>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="20">No hay registros</td>
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      <br>
+    </div>
+    <div class="container-fluid">
+      <form [formGroup]="orden_trabajoForm" (ngSubmit)="updateOrdenTrabajo()">
+
+        <div class="row fila-opciones flex-nowrap">
+          <div class="col-4 box-1">
+
+            <p style="font-weight: 500; text-align:center">OBSERVACION (OPCIONAL): </p>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <!-- <mat-label>Favorite food</mat-label> -->
+              <textarea matInput name="observacion" id="observacion" formControlName="observacion"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-1 box-2">
+            <p style="font-weight: 500; text-align:center">TIEMPO ENTREGA *: </p>
+
+
+            <mat-form-field appearance="fill">
+              <mat-select matNativeControl required formControlName="id_tiempo_entrega" name="id_tiempo_entrega"
+                id="id_tiempo_entrega" (selectionChange)="onChangeTiempoEntrega($event, null)">
+                <mat-option *ngFor="let datoTiempoEntrega of selectorTiempoEntrega"
+                  value="{{ datoTiempoEntrega.id_tiempo_entrega }}">
+                  {{datoTiempoEntrega.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p style="text-align: center;">{{ this.descripcionTiempoEntrega }}</p>
+          </div>
+
+          <div class="col-1 box-3">
+            <p style="font-weight: 500; text-align:center">METODO DE PAGO *: </p>
+            <mat-form-field appearance="fill">
+              <mat-select matNativeControl required formControlName="id_forma_pago" name="id_forma_pago"
+                id="id_forma_pago" (selectionChange)="onChangeMetodoPago($event, null)">
+                <mat-option *ngFor="let datoFormaPago of selectorFormaPago" value="{{ datoFormaPago.id_forma_pago }}">
+                  {{datoFormaPago.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p style="text-align: center;">{{ this.descripcionFormaPago }}</p>
+          </div>
+
+          <div class="col-2 box-4">
+            <p style="font-weight: 500; text-align:center">TIPO IMPUESTO *: </p>
+            <mat-form-field appearance="fill">
+              <mat-select matNativeControl required formControlName="id_tipo_impuesto" name="id_tipo_impuesto"
+                id="id_tipo_impuesto" (selectionChange)="onChangeTipoImpuesto($event, null)">
+                <mat-option *ngFor="let datoTipoImpuesto of selectorTipoImpuesto"
+                  value="{{ datoTipoImpuesto.id_tipo_impuesto }}">{{datoTipoImpuesto.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-9">
+                  <p style="font-weight: 500; text-align:center">DESCUENTO (OPCIONAL): </p>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <span matPrefix>$ &nbsp;</span>
+                    <input matInput formControlName="descuento" name="descuento" id="descuento"
+                      (change)="getCalculosDetalleOrdenTrabajo()">
+                  </mat-form-field>
+                </div>
+                <div class="col-2">
+                  <div style="padding-top: 40px;">
+                    <div class="btn fa-solid fa-equals area-cal"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="col-1 box-6">
+            <p style="font-weight: 500; text-align:center; margin-bottom:7px;">Descargar PDF</p>
+            <div class="pdf-button"><img src="../../../../../assets/icons/pdf.png" alt=""
+                style="height: 40px; display: block; margin-left: auto; margin-right: auto;" (click)="openPdf()"></div>
+
+
+            <p style="font-weight: 500; text-align:center">Enviado </p>
+            <button class="btn btn-danger" style="width: 100%;">No enviado</button>
+
+          </div>
+          <div class="col-2 box-7">
+            <div class="seccion-total">
+              <div class="container-fluid">
+
+                <div class="row pt-4">
+                  <div class="col-6">
+                    <p class="valor-neto">Valor Neto</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="valor-valor-neto" style="text-align: end;"> $ {{ this.addPoint(this.valorSumaNeto) }} </p>
+                  </div>
+                </div>
+
+                <div class="row pt-4">
+                  <div class="col-6">
+                    <p class="valor-iva">Valor IVA</p>
+
+                  </div>
+                  <div class="col-6">
+                    <p class="valor-valor-iva" style="text-align: end;"> $ {{ this.addPoint(this.valorSumaIVA) }} </p>
+                  </div>
+                </div>
+
+                <div class="row pt-4">
+                  <div class="col-6">
+                    <p class="valor-total">Valor Total </p>
+                  </div>
+                  <div class="col-6">
+                    <p class="valor-valor-total" style="text-align: end;"> $ {{ this.addPoint(this.valorSumaTotal) }}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="row fila-botones flex-nowrap">
+          <div class="col">
+
+            <button class="btn btn-eliminar" type="button" (click)="deleteOrdenTrabajo()">
+              ELIMINAR
+            </button>
+
+            <button class="btn btn-agregar" type="submit" [disabled]="orden_trabajoForm.invalid || !this.isClienteSelected"
+              style="font-size: 24px;">
+              EDITAR COTIZACION
+            </button>
+          </div>
+        </div>
+
+
+
+
+      </form>
+
+      <br><br><br>
+    </div>
+
+  </div>
+</div>

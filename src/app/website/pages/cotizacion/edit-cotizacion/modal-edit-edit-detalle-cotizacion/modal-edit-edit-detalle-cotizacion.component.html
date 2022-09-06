@@ -1,0 +1,398 @@
+<div class="container">
+  <div class="row mb-4 pt-3" style="background-color: #444759 !important;">
+    <div class="col-11">
+      <h2 style="font-size: 25px; color:white;">Agregar Detalle de Cotizacion</h2>
+    </div>
+    <div class="col-1">
+      <!-- <button class="btn btn-secondary" mat-button mat-dialog-close><i class="fa-solid fa-xmark"></i></button> -->
+    </div>
+  </div>
+  <div class="row">
+
+    <form [formGroup]="detalleCotizacionForm" (ngSubmit)="updateDetalleCotizacion()">
+
+      <mat-dialog-content>
+
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-only-field">
+                  <p class="read-only-title">ID DETALLE</p>
+                  <input class="read-only-input" matInput [readonly]="true" id="id_detalle_cotizacion"
+                    name="id_detalle_cotizacion" formControlName="id_detalle_cotizacion"
+                    value="{{ this.id_detalle_cotizacion }}">
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-only-field">
+                  <p class="read-only-title">ID COTIZACION</p>
+                  <input class="read-only-input" matInput [readonly]="true" id="id_cotizacion" name="id_cotizacion"
+                    formControlName="id_cotizacion" value="{{this.id_cotizacion}}">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-8">
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>CATEGORIA</mat-label>
+                <mat-select matNativeControl required formControlName="id_categoria" name="id_categoria"
+                  id="id_categoria" (selectionChange)="onChange($event)">
+                  <mat-option *ngFor="let datoCategoria of selectorCategoria" value="{{ datoCategoria.id_categoria }}">
+                    {{datoCategoria.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-only-field">
+                  <p class="read-only-title">ID PRODUCTO</p>
+                  <input class="read-only-input" matInput [readonly]="true" id="id_producto" name="id_producto"
+                    formControlName="id_producto">
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-10">
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>PRODUCTO</mat-label>
+
+                <mat-select matNativeControl required formControlName="producto" name="producto" id="producto"
+                  (selectionChange)="onSelectProducto($event)">
+                  <mat-option *ngFor="let datoProducto of selectorProducto" value="{{ datoProducto.id_producto }}">
+                    {{datoProducto.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="row mb-4">
+              <div class="col-4">
+                <img *ngIf="!imagen" src="../../../../../../assets/images/placeholder.png"
+                  style="height: 150px; width:200px">
+                <img src="{{this.ruta + this.imagen}}" *ngIf="imagen" style="height: 150px; width:200px">
+              </div>
+
+              <div class="col-8">
+                <div class="container-fluid">
+                  <div class="row">
+                    <p *ngIf="descripcionProducto" style="padding:12px;">
+                      {{this.descripcionProducto}}
+                    </p>
+                    <div *ngIf="!descripcionProducto">
+                      <p style="color:white; padding: 12px">asdf</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="container-fluid">
+
+                  <div class="row">
+                    <div class="mb-3" style="text-align: justify;">
+                      <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>DESCRIPCION (OPCIONAL)</mat-label>
+                        <textarea matInput id="descripcion" name="descripcion" formControlName="descripcion"
+                          style="height: 60px;"></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="row" *ngIf="this.primeraParte">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>CANTIDAD (un.)</mat-label>
+                  <input style="font-size: 20px; font-weight: 500;" matInput type="number" id="cantidad" name="cantidad"
+                    formControlName="cantidad" min="1" (change)="calculoArea()">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>ANCHO (cm.)</mat-label>
+                  <input style="font-size: 20px; font-weight: 500;" matInput type="number" id="ancho" name="ancho"
+                    formControlName="ancho" min="1" (change)="calculoArea()">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>ALTO (cm.)</mat-label>
+                  <input style="font-size: 20px; font-weight: 500;" matInput type="number" id="alto" name="alto"
+                    formControlName="alto" min="1" (change)="calculoArea()">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-1" style="padding-top: 5px;">
+              <div class="btn fa-solid fa-equals area-cal"></div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-result-field">
+                  <p class="read-result-title">AREA</p>
+                  <input class="read-result-input" matInput id="area" name="area" formControlName="area"
+                    [readonly]="true" style="font-size: 20px; font-weight: 500;">
+                </div>
+              </div>
+            </div>
+            <div class="col-1"></div>
+          </div>
+
+
+
+
+          <!--  PRIMERA PARTE BLOQUEADA -->
+          <div class="row" *ngIf="!this.primeraParte" style="padding-bottom: 16px;">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+
+                <div class="disabled-field">
+                  <p class="disabled-title">CANTIDAD (un.)</p>
+                  <input class="disabled-input" matInput type="number" id="cantidad" name="cantidad"
+                    formControlName="cantidad">
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="disabled-field">
+                  <p class="disabled-title">ANCHO (cm.)</p>
+                  <input class="disabled-input" matInput type="number" id="ancho" name="ancho" formControlName="ancho">
+                </div>
+              </div>
+
+            </div>
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="disabled-field">
+                  <p class="disabled-title">ALTO (cm.)</p>
+                  <input class="disabled-input" matInput type="number" id="alto" name="alto" formControlName="alto">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-1" style="padding-top: 5px;">
+              <div class="btn fa-solid fa-equals area-cal"></div>
+            </div>
+
+            <div class="col-3">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-result-field">
+                  <p class="read-result-title">AREA</p>
+                  <input class="read-result-input" matInput id="area" name="area" formControlName="area"
+                    [readonly]="true">
+                </div>
+              </div>
+            </div>
+            <div class="col-1"></div>
+          </div>
+
+
+
+
+          <div class="row" *ngIf="this.segundaParte">
+            <div class="col-6">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>TIPO VALOR</mat-label>
+                  <mat-select matNativeControl required id="tipo_valor" name="tipo_valor" formControlName="tipo_valor"
+                    (selectionChange)="onSelectTipoValor($event)">
+                    <mat-option style="font-size: 20px; font-weight: 500;"
+                      *ngFor="let tipo_valor of this.selectorTipoValor" value="{{tipo_valor.id_tipo_valor}}">
+                      {{tipo_valor.nombre}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-result-field">
+                  <p class="read-result-title">VALOR M2</p>
+                  <p class="read-result-input" style="font-size: 25px; font-weight: 500;">
+                    {{this.valorM2Visual}}
+                  </p>
+                  <input class="read-result-input" matInput id="valor_m2" name="valor_m2" formControlName="valor_m2"
+                    [readonly]="true" style="font-size: 20px; font-weight: 500; display: none;">
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-result-field">
+                  <p class="read-result-title">VALOR UNITARIO</p>
+                  <p class="read-result-input" style="font-size: 25px; font-weight: 500;">
+                    {{this.calculoUnitarioVisual}}
+                  </p>
+                  <input class="read-result-input" matInput id="valor_unitario" name="valor_unitario"
+                    formControlName="valor_unitario" [readonly]="true"
+                    style="font-size: 25px; font-weight: 500; display: none;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="!this.segundaParte" style="padding-bottom: 16px;">
+            <div class="col-6">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="disabled-field">
+                  <p class="disabled-title">TIPO VALOR</p>
+                  <input class="disabled-input" required matNativeControl id="tipo_valor" name="tipo_valor"
+                    formControlName="tipo_valor">
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="disabled-field">
+                  <p class="disabled-title">VALOR M2</p>
+                  <input class="disabled-input" required matInput id="valor_m2" name="valor_m2"
+                    formControlName="valor_m2">
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="disabled-field">
+                  <p class="disabled-title">VALOR UNITARIO</p>
+                  <input class="disabled-input" matInput id="valor_unitario" name="valor_unitario"
+                    formControlName="valor_unitario">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+
+            <div class="col-5" style="float: left;">
+              <div class="btn btn-add" (click)="addTerminacionDetalle()" style="font-size: 28px; font-weight: 500; ">
+                Agregar terminaciones</div>
+            </div>
+          </div>
+          <br>
+
+
+
+          <div class="row">
+            <table mat-table [dataSource]="terminacionDetalleData" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="id_terminacion_detalle" style="display: none;">
+                <th mat-header-cell *matHeaderCellDef style="display: none;"> ID </th>
+                <td mat-cell *matCellDef="let element" style="display: none;"> {{element.id_terminacion_detalle}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef style="padding-left: 12px; width: 30% !important;"> NOMBRE </th>
+                <td mat-cell *matCellDef="let element" style="padding-left: 12px;"> {{element.nombre}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef style="width: 60% !important;"> DESCRIPCION </th>
+                <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="eliminar">
+                <th mat-header-cell *matHeaderCellDef style="width: 10% !important;"> ELIMINAR </th>
+                <td mat-cell *matCellDef="let element">
+                  <a class="btn btn-danger fa-solid fa-xmark"
+                    style="color:white; border-radius: 50%; padding-top: 8px; padding-bottom: 8px;"
+                    (click)="removeDetalleTerminacion(element.id_terminacion_detalle)"></a>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+          </div>
+          <br>
+          <br>
+
+
+
+
+
+          <div class="row">
+
+            <div class="col-3 offset-4">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <span matPrefix>$ &nbsp;</span>
+                  <mat-label>VALOR ADICIONAL</mat-label>
+                  <input matInput type="number" id="valor_adicional" name="valor_adicional"
+                    formControlName="valor_adicional" (change)="calcularTotal()">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-1" style="padding-top: 5px;">
+              <a class="btn fa-solid fa-equals area-cal"></a>
+            </div>
+
+            <div class="col-4">
+              <div class="mb-3" style="text-align: justify;">
+
+                <div class="read-result-field">
+                  <p class="read-result-title">VALOR TOTAL</p>
+                  <p class="read-result-input" style="font-size: 25px; font-weight: 500;">
+                    {{this.calculoTotalVisual}}
+                  </p>
+
+                  <input class="read-result-input" matInput id="valor_total" name="valor_total"
+                    formControlName="valor_total" [readonly]="true" style="display: none;">
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <div class="col-4">
+          <button class="btn btn-danger" style="margin-right: 15px;" mat-button mat-dialog-close>CANCELAR</button>
+          <button type="submit" class="btn btn-primary" [disabled]="detalleCotizacionForm.invalid"
+            mat-dialog-close>EDITAR DETALLE</button>
+        </div>
+      </mat-dialog-actions>
+
+
+    </form>
+
+
+
+  </div>
+
+</div>

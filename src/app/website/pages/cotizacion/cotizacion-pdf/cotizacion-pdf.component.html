@@ -1,0 +1,178 @@
+<mat-dialog-content>
+  <!-- FORMATO DE PDF -->
+  <div id="pdfTable" #pdfTable style="width: 612px !important;">
+
+    <div class="container" style="padding: 0px; margin: 0px;">
+      <div class="row" style="padding: 0px; margin: 0px;">
+        <h1 style="padding: 20px 0px 0px 0px; margin: 0px; text-align: center;">COTIZACION N° {{this.id_cotizacion}}
+        </h1>
+        <h4 style="padding: 0px 0px 10px 0px; margin: 0px; text-align: center;">{{ todayDate }} - {{ todayHour }}</h4>
+      </div>
+
+
+      <div class="row" style="padding: 0px; margin: 0px;">
+        <h2 style="padding: 5px; margin: 10px 0px 10px 0px; background-color: rgb(197, 197, 197); font-size: 16px;">
+          DATOS
+          DE CLIENTE</h2>
+
+        <div class="col-6" style="padding: 0px 0px 0px 20px; margin: 0px;">
+          <p style="padding: 0px; margin: 0px; font-size: 12px;"> <strong
+              style="padding-right: 6px; font-size: 12px;">Nombre</strong> : {{ this.nombre_cliente }}</p>
+          <p style="padding: 0px; margin: 0px; font-size: 12px;"><strong
+              style="padding-right: 22px; font-size: 12px;">Email</strong> : {{ this.correo_cliente }}</p>
+          <p style="padding: 0px; margin: 0px; font-size: 12px;"><strong
+              style="padding-right: 12px; font-size: 12px;">Celular</strong> : {{ this.celular_cliente }}</p>
+        </div>
+
+
+        <div class="col-6" style="padding: 0px; margin: 0px;">
+          <p style="padding: 0px; margin: 0px; font-size: 12px;"><strong
+              style="padding-right: 5px; font-size: 12px;">Empresa</strong>: {{ this.nombre_empresa }}</p>
+          <p style="padding: 0px; margin: 0px; font-size: 12px;"><strong
+              style="padding-right: 36px; font-size: 12px;">Rut</strong> : {{ this.rut_empresa }}</p>
+          <p style="padding: 0px; margin: 0px; font-size: 12px;"><strong
+              style="padding-right: 17px; font-size: 12px;">Ciudad</strong>: {{ this.direccion_empresa }}</p>
+        </div>
+      </div>
+
+
+      <div class="row" style="padding: 0px; margin: 0px;">
+        <h2 style="padding: 5px; margin: 10px 0px 10px 0px; background-color: rgb(197, 197, 197); font-size: 16px;">
+          DETALLE</h2>
+        <div class="container" style="padding: 0px; margin: 0px;">
+          <div class="mat-elevation-z8" style="padding: 0px; margin: 0px;">
+            <table mat-table [dataSource]="dataSource" matSort style="padding: 0px; margin: 0px;">
+
+              <ng-container matColumnDef="id_producto" class="table-head" style="display:none;">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5% !important;"> ID</th>
+                <td mat-cell *matCellDef="let element" style="font-size: 10.5px;"> {{element.id_producto}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="descripcion" class="table-head">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 60% !important; border-right: none !important;"> DESCRIPCION </th>
+                <td mat-cell *matCellDef="let element" style="text-align:start; padding-left: 10px; font-size: 10.5px; border-right: none !important;">
+                  {{element.producto}} - {{ element.descripcion_producto }}, {{element.descripcion}} <br>
+                 <strong>Medida :</strong>  {{element.ancho}} cm. ANCHO X {{element.alto}} cm. ALTO <br>
+                  {{element.terminaciones}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="imagen">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="border-left: none !important;"></th>
+                <td mat-cell *matCellDef="let element" style="border: none !important;"> 
+                  <img src="{{this.ruta + element.imagen}}" width="65">
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="cantidad" class="table-head">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 3% !important; margin:0px !important"> CANT. </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 10.5px;"> {{element.cantidad}} un. </td>
+              </ng-container>
+
+              <ng-container matColumnDef="valor_unidad" class="table-head">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10% !important;"> VALOR UN. </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 10.5px;"> $ {{
+                  this.addPoint(element.valor_unidad) }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="valor_total" class="table-head">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10% !important;"> VALOR TOTAL </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 10.5px;"> $ {{
+                  this.addPoint(element.valor_total)
+                  }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsPdf"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsPdf;"></tr>
+
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: none; border-top: 2px solid black;">
+
+      <div class="row">
+        <div class="col-7" style="padding-left: 20px;">
+          <p style="font-size: 12px;"> <strong style="font-size: 12px; padding-right: 13px;">Tipo de impuesto</strong> :
+            {{ this.tipo_impuesto
+            }}</p>
+          <p style="font-size: 12px;"><strong style="font-size: 12px; padding-right: 26px;">Forma de pago</strong> : {{
+            this.formaPago }}</p>
+          <p style="font-size: 12px;"><strong style="font-size: 12px; padding-right: 5px;">Tiempo de entrega</strong> :
+            {{
+            this.tiempoEntrega
+            }}</p>
+        </div>
+
+        <div class="col-1">
+          <hr style="border: none; border-left: 2px solid black; height: 100%; width: 1px; padding: 0px; margin: 0px;">
+        </div>
+
+        <div class="col-4">
+
+          <p style="font-size: 12px;"><strong style="font-size: 12px; padding-right: 6px;">Descuento</strong> : $ {{
+            this.addPoint(this.descuento) }} </p>
+
+          <p style="font-size: 12px;"><strong style="font-size: 12px; padding-right: 6px;">Valor Neto</strong> : $ {{
+            this.addPoint(this.valorSumaNeto) }} </p>
+
+          <p style="font-size: 12px;"><strong style="font-size: 12px; padding-right: 13px;">Valor IVA</strong> : $ {{
+            this.addPoint(this.valorSumaIVA) }} </p>
+            
+          <p style="font-size: 12px;"><strong style="font-size: 12px; padding-right: 6px;">Valor Total</strong> : $ {{
+            this.addPoint(this.valorSumaTotal) }} </p>
+
+        </div>
+      </div>
+
+      <hr style="border: none; border-top: 2px solid black;">
+
+      <div class="row">
+        <p style="font-weight: 500; font-size: 15px;">OBSERVACION: </p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <textarea matInput style="font-size: 11px;">{{this.observacion}}</textarea>
+        </mat-form-field>
+      </div>
+
+
+      <div class="row" style="padding-left: 15px;">
+        <p style="font-size: 11px;">{{ this.descripcionFormaPago }}</p>
+        <p style="font-size: 11px;">{{ this.descripcionTiempoEntrega }}</p>
+      </div>
+
+      <hr style="border: none; border-top: 2px solid black;">
+
+      <div class="row" style="padding:  0px 0px 10px 0px;; margin:0px">
+        <p style="text-align: center; font-size: 11px; font-weight: 550; padding: 0px; margin: 0px;">Grafica Gonzales
+          Limitada - Rut: 76.298.884-4 - Giro: Publicidad -
+          Direccion: Gomez Carreño 237. La Serena, Chile</p>
+        <p style="text-align: center; font-size: 11px; font-weight: 550; padding: 0px; margin: 0px;">email:
+          ventas@graficag.cl - Fono: 512642204 - 512578151 - Celular:
+          +569 86496752 - Instagram: @graficag</p>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-danger" style="margin-right: 15px; margin-top: 15px;" mat-button mat-dialog-close>Cerrar</button>
+
+      </div>
+      <div class="col-3 offset-7">
+        <button class="btn btn-add" (click)="downloadAsPDF()">
+          Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+ 
+</mat-dialog-actions>

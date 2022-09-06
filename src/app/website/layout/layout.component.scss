@@ -1,0 +1,66 @@
+.header-img {
+    height: 100px;
+    margin-left: 50%;
+}
+
+.hora {
+    padding-top: 20px;
+    font-size: 46px;
+    padding-left: 40px;
+    font-weight: 500;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.fecha {
+    font-size: 36px;
+    padding-top: 0px;
+    margin-top: 20px;
+}
+
+.profile-img {
+    padding-top: 20px;
+    height: 60px;
+}
+
+.nav-link {
+    color: white;
+    
+}
+
+
+.nav-item {
+    background-color: rgb(196, 196, 196, 16%);
+    color: white;
+    margin: 1px 4px 1px 4px;
+    border-radius: 15px;
+    padding: 1px 20px 1px 20px;
+}
+
+.nav-item:hover {
+    background-color: rgba(196, 196, 196, 0.466);
+    transition: 0.3s;
+    color: white;
+    margin: 1px 4px 1px 4px;
+    border-radius: 15px;
+    padding: 1px 20px 1px 20px;
+}
+
+.nav-item:active {
+    background-color: rgba(196, 196, 196, 0.719);
+    transition: 0.3s;
+    color: white;
+    margin: 1px 4px 1px 4px;
+    border-radius: 15px;
+    padding: 1px 20px 1px 20px;
+}
+
+.navbar {
+    background-color: #444759 !important;
+}
+
+.fila{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}

@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+
+
+    <!-- Modal -->
+    <div class="modal fade mt-5" id="modal-categoria-edit" tabindex="-1" aria-labelledby="modal-categoria-editLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="modal-categoriaLabel">Editar Categoria</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="categoriaForm" (ngSubmit)="updateCategoria()">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="mb-3" style="text-align: justify;">
+                      <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>ID</mat-label>
+                        <input matInput id="id_categoria" name="id_categoria" formControlName="id_categoria" [readonly]="true">
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                  <div class="col-9">
+                    <div class="mb-3" style="text-align: justify;">
+                      <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput id="nombre" name="nombre" formControlName="nombre">
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="categoriaForm.invalid"
+                  data-bs-dismiss="modal">Editar categoria</button>
+              </div>
+
+            </form>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

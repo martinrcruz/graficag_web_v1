@@ -1,0 +1,66 @@
+.btn-add {
+  margin-top: 15px;
+  background-color: #2196f3 !important;
+  color:white;
+}
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #f3f3f3;
+  text-align: center;
+}
+
+th {
+  background-color: #444759 !important;
+  color: white !important;
+  text-align: center !important;
+  padding-left: 10px !important;
+}
+
+.full-width {
+  width: 100%;
+}
+.mat-column-id_contacto_cliente {
+  width: 5% !important;
+}
+.mat-column-nombre {
+  width: 30% !important;
+}
+.mat-column-correo {
+  width: 30% !important;
+}
+.mat-column-celular {
+  width: 15% !important;
+}
+.mat-column-cargo {
+  width: 15% !important;
+}
+.mat-column-eliminar {
+  width: 5% !important;
+}
+
+.read-only-field {
+  background-color: rgb(194, 194, 194);
+  border-bottom: 1px rgb(70, 70, 70) solid;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.read-only-title {
+  color: rgb(63, 63, 63);
+  font-size: 10.5px;
+  padding: 8px 0px 0px 8px;
+  margin-bottom: 0px;
+}
+
+.read-only-input {
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 0px 0px 5px 10px;
+  margin-bottom: 0px;
+  font-size: 20px;
+}

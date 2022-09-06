@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="row pb-4">
+    <div class="col-11">
+      <h2>Agregar producto</h2>
+    </div>
+    <div class="col-1">
+      <button class="btn btn-secondary" mat-button mat-dialog-close><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <form [formGroup]="productoForm" (ngSubmit)="addProducto()" enctype="multipart/form-data">
+
+      <mat-dialog-content>
+
+        <div class="container-fluid">
+
+
+          <div class="row">
+
+            <div class="col-3 offset-1">
+              <h3 class="pt-3">Selecciona una categoria: </h3>
+
+            </div>
+
+
+            <div class="col-7">
+              <mat-form-field class="full-width" appearance="fill">
+
+                <mat-select matNativeControl required formControlName="categoria" name="categoria" id="categoria">
+                  <mat-option *ngFor="let datoCategoria of selectorCategoria" value="{{ datoCategoria.id_categoria }}">
+                    {{datoCategoria.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-1">
+
+            </div>
+
+          </div>
+          <hr>
+          <br>
+
+          <div class="row">
+
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>ID</mat-label>
+                  <input autocomplete="off" matInput [readonly]="true" value="{{this.productoLastId}}">
+                </mat-form-field>
+              </div>
+
+            </div>
+
+
+            <div class="col-10">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Nombre</mat-label>
+                  <input autocomplete="off" matInput id="nombre" name="nombre" formControlName="nombre">
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+          <div class="row pb-3">
+            <div class="col-4 offset-4">
+              <img *ngIf="!imageSrc" src="../../../../../assets/images/placeholder.png"
+                style="height: 150px; width:200px">
+              <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:200px">
+            </div>
+
+          </div>
+          <div class="row pb-4">
+            <div class="col-4 offset-4">
+              <input autocomplete="off" type="file" id="imagen" name="imagen" formControlName="imagen" (change)="onFileChange($event)"
+                style="margin-left:30px">
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="col">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Descripcion</mat-label>
+                  <textarea matInput id="descripcion" name="descripcion" formControlName="descripcion"
+                    style="height: 60px;"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+
+          <form [formGroup]="tipoValorForm" (ngSubmit)="addTipoValor()">
+
+            <div class="row">
+              <h2>Tipo de valor:</h2>
+
+              <div class="col-8">
+                <div class="mb-3" style="text-align: justify;">
+                  <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Nombre Tipo Valor</mat-label>
+                    <!-- <input autocomplete="off" matInput > -->
+                    <mat-select matNativeControl required id="nombre_valor" name="nombre_valor"
+                      formControlName="nombre_valor">
+                      <mat-option value="ECONOMICO"> VALOR ECONOMICO </mat-option>
+                      <mat-option value="MEDIO"> VALOR MEDIO </mat-option>
+                      <mat-option value="GENERAL"> VALOR GENERAL </mat-option>
+                      <mat-option value="URGENTE"> VALOR URGENTE </mat-option>
+                    </mat-select>
+
+                  </mat-form-field>
+
+
+
+                </div>
+              </div>
+
+
+              <div class="col-3">
+                <div class="mb-3" style="text-align: justify;">
+                  <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Valor</mat-label>
+                    <span matPrefix>$ &nbsp;</span>
+                    <input autocomplete="off" matInput id="valor" name="valor" formControlName="valor">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-1">
+                <button class="btn btn-info mt-2" type="submit"><i class="fa-solid fa-plus"
+                    style="color:white;"></i></button>
+              </div>
+
+            </div>
+          </form>
+
+
+          <div class="row">
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSort>
+
+
+
+                <ng-container matColumnDef="nombre" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="valor" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> VALOR </th>
+                  <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor)}} </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="eliminar" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> ELIMINAR </th>
+                  <td mat-cell *matCellDef="let element">
+                    <a class="btn btn-danger fa-solid fa-trash-can" style="color:white;"
+                      (click)="deleteTipoValor(element.id_tipo_valor)"></a>
+                  </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+        <br>
+
+      </mat-dialog-content>
+      <hr>
+      <mat-dialog-actions>
+        <div class="col-6 offset-6">
+          <button class="btn btn-secondary" mat-button mat-dialog-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="productoForm.invalid" mat-dialog-close>Agregar
+            producto</button>
+        </div>
+      </mat-dialog-actions>
+    </form>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,228 @@
+.bread-crumb {
+  background-color: rgb(238, 238, 238);
+  padding: 15px 15px 15px 35px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+
+table {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.contenedor-tabla {
+  background-color: #ffffff;
+}
+
+.header {
+  padding: 30px 0px 0px 30px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+td,
+th {
+  border: 1px solid #f3f3f3;
+  text-align: center;
+}
+
+th {
+  background-color: #444759 !important;
+  color: white;
+  text-align: center !important;
+  padding-left: 10px !important;
+}
+
+.mat-sort-header-arrow .mat-sort-header-indicator .mat-sort-header-pointer-left .mat-sort-header-pointer-right .mat-sort-header-pointer-middle {
+  color: white !important;
+  opacity: 1;
+
+}
+
+.mat-sort-header-arrow .ng-trigger .ng-trigger-arrowPosition .ng-tns-c244-4 .ng-star-inserted {
+  color: white !important;
+  opacity: 1;
+
+}
+
+.contenedor-filtro {
+  background-color: #f3f3f3;
+  padding: 15px;
+
+}
+
+.boton-filtro {
+  background-color: #7B6F93;
+  border: none;
+  padding: 10px 30px 10px 30px;
+  margin-top: 5%;
+  float: right;
+  width: 140px;
+  color: white;
+  border-radius: 5px;
+}
+
+.boton-reset {
+  background-color: rgb(224, 179, 28);
+  color: white;
+  border: none;
+  padding: 10px 30px 10px 30px;
+  margin-top: 10px;
+  float: right;
+  width: 140px;
+  border-radius: 5px;
+
+}
+
+
+//[solo muestra]
+.estado_servicio {
+  background-color: #f9b115;
+  color: white;
+  font-weight: 500;
+  padding: 3px 10px 3px 10px;
+}
+
+.openModalButton {
+  width: 45px;
+}
+
+.estado_aprobada {
+  background-color: green;
+  color: white;
+  font-weight: 500;
+  padding: 10px 10px 10px 10px;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.estado_pendiente {
+  background-color: rgb(224, 202, 4);
+  color: white;
+  font-weight: 500;
+  padding: 10px 10px 10px 10px;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.estado_rechazada {
+  background-color: rgb(236, 87, 1);
+  color: white;
+  font-weight: 500;
+  padding: 10px 10px 10px 10px;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.estado_revisar {
+  background-color: rgb(105, 22, 153);
+  color: white;
+  font-weight: 500;
+  padding: 10px 10px 10px 10px;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.btn-add {
+  margin-top: 15px;
+  background-color: #0d6efd !important;
+  color: white;
+}
+
+.indicador-titulo {
+  font-weight: 600;
+  text-align: center;
+}
+
+.indicador-valor {
+  background-color: white;
+  font-weight: 500;
+  color: red;
+  font-size: 20px;
+  padding: 15px 15px 10px 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.mat-column-id_cotizacion {
+  width: 3% !important;
+}
+
+
+.mat-column-nombre_cliente {
+  width: 10% !important;
+}
+
+.mat-column-email_cliente {
+  width: 10% !important;
+}
+
+.mat-column-rut_empresa {
+  width: 5% !important;
+}
+
+.mat-column-nombre_empresa {
+  width: 10% !important;
+}
+
+.mat-column-fecha_cotizacion {
+  width: 3% !important;
+}
+
+.mat-column-nro_item {
+  width: 3% !important;
+}
+
+.mat-column-nro_cantidad {
+  width: 3% !important;
+}
+
+.mat-column-tipo_impuesto {
+  width: 3% !important;
+}
+
+.mat-column-forma_pago {
+  width: 3% !important;
+}
+
+.mat-column-enviado_correo {
+  width: 3% !important;
+}
+
+.mat-column-descargar_pdf {
+  width: 3% !important;
+}
+
+.mat-column-total_neto {
+  width: 3% !important;
+}
+
+.mat-column-total_iva {
+  width: 3% !important;
+}
+
+.mat-column-total {
+  width: 3% !important;
+}
+
+.mat-column-deuda {
+  width: 3% !important;
+}
+
+.mat-column-ultima_ot {
+  width: 6% !important;
+}
+
+.mat-column-gestionar {
+  width: 3% !important;
+}
+

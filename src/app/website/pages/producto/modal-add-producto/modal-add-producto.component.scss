@@ -1,0 +1,61 @@
+.btn-add {
+  margin-top: 15px;
+  background-color: #2196f3 !important;
+  color:white;
+}
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+input[type='file'] {
+  color: transparent;
+}
+
+table {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.contenedor-tabla {
+  background-color: #ffffff;
+}
+
+.header {
+  padding: 30px 0px 0px 30px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+
+td,
+th {
+  border: 1px solid #f3f3f3;
+  text-align: center;
+}
+
+th {
+  background-color: #444759 !important;
+  color: white;
+  text-align: center !important;
+}
+
+.mat-sort-header-arrow .mat-sort-header-indicator .mat-sort-header-pointer-left .mat-sort-header-pointer-right .mat-sort-header-pointer-middle {
+  color: white !important;
+  opacity: 1;
+
+}
+
+.mat-sort-header-arrow .ng-trigger .ng-trigger-arrowPosition .ng-tns-c244-4 .ng-star-inserted {
+  color: white !important;
+  opacity: 1;
+
+}

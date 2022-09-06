@@ -1,0 +1,97 @@
+
+
+<div class="row mb-4 pt-3" style="background-color: #8841b1bb !important;">
+  <div class="col-11">
+    <h2 style="font-size: 25px; color:white;">Seleccionar cliente</h2>
+  </div>
+  <div class="col-1">
+    <!-- <button class="btn btn-secondary" mat-button mat-dialog-close><i class="fa-solid fa-xmark"></i></button> -->
+  </div>
+</div>
+<mat-dialog-content>
+
+  <div class="modal-body">
+
+
+    <div class="row">
+      <div class="col-3">
+      </div>
+      <div class="col-10 offset-1">
+        <mat-form-field appearance="standard">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSourceCliente" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id_cliente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element"
+            style="padding-left: 10px !important; margin-left: 0px !important; text-align: left !important; font-size: 12px;">
+            {{element.id_cliente}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+          <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 12px;">
+            {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CORREO </th>
+          <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-weight: 550; font-size: 12px;">
+            {{element.correo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="celular">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: left;"> CELULAR </th>
+          <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 12px;">
+            {{element.celular}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rut_empresa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> RUT EMPRESA </th>
+          <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 12px;">
+            {{element.rut_empresa}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre_empresa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE EMPRESA </th>
+          <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 12px;">
+            {{element.nombre_empresa}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="seleccionar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+          <td mat-cell *matCellDef="let element">
+            <a class="btn btn-info fa-solid fa-arrow-pointer" style="color:white; margin-left:8px; margin-right: 8px;"
+              (click)="seleccionarCliente(element.id_cliente)" mat-dialog-close></a>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsCliente"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsCliente;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users">
+      </mat-paginator>
+    </div>
+
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="col-4">
+    <button class="btn btn-danger" style="margin-right: 15px;" mat-button mat-dialog-close>CERRAR</button>
+  </div>
+
+</mat-dialog-actions>

@@ -1,0 +1,228 @@
+<div class="container">
+
+  <div class="row mb-4 pt-3" style="background-color: #444759 !important;">
+    <div class="col-11">
+      <h2 style="font-size: 25px; color:white;">Agregar Cliente</h2>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <form [formGroup]="clienteForm" (ngSubmit)="addCliente()">
+
+      <mat-dialog-content>
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-2">
+              <div class="mb-3" style="text-align: justify;">
+                <div class="read-only-field">
+                  <p class="read-only-title">ID</p>
+                  <input autocomplete="off" class="read-only-input" matInput [readonly]="true" id="id_cliente"
+                    name="id_cliente"
+                    value="{{ this.newIdCliente }}">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-10">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Nombre</mat-label>
+                  <input autocomplete="off" matInput id="nombre" name="nombre" formControlName="nombre">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-5">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Rut</mat-label>
+                  <input autocomplete="off" matInput id="rut" name="rut" formControlName="rut" (change)="rutFormatter($event)" maxlength="12">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Correo</mat-label>
+                  <input autocomplete="off" matInput id="correo" name="correo" formControlName="correo">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+
+            <div class="col-4">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Celular</mat-label>
+                  <span matPrefix>+569 &nbsp;</span>
+                  <input autocomplete="off" matInput id="celular" name="celular" formControlName="celular">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <span matPrefix>512 &nbsp;</span>
+                  <mat-label>Telefono</mat-label>
+                  <input autocomplete="off" matInput id="telefono" name="telefono" formControlName="telefono">
+                </mat-form-field>
+              </div>
+            </div>
+
+
+            <div class="col-4">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Empresa</mat-label>
+
+                  <mat-select matNativeControl id="empresa" name="empresa" formControlName="empresa">
+                    <mat-option *ngFor="let datoEmpresa of selectorEmpresa" value="{{ datoEmpresa.id_empresa }}">
+                      {{datoEmpresa.nombre}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="mb-3" style="text-align: justify;">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Observacion</mat-label>
+                  <input autocomplete="off" matInput id="observacion" name="observacion" formControlName="observacion"
+                    style="height: 60px;">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+
+          <form [formGroup]="contactoClienteForm" (ngSubmit)="addContactoCliente()">
+            <div class="row">
+              <h2>ASOCIAR SUB CONTACTO</h2>
+              <div class="col-3">
+                <div class="mb-3" style="text-align: justify;">
+                  <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Nombre Contacto</mat-label>
+                    <input autocomplete="off" matInput id="nombre_contacto" name="nombre_contacto" formControlName="nombre_contacto">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="mb-3" style="text-align: justify;">
+                  <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Correo Contacto</mat-label>
+                    <input autocomplete="off" matInput id="correo_contacto" name="correo_contacto" formControlName="correo_contacto">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-2">
+                <div class="mb-3" style="text-align: justify;">
+                  <mat-form-field class="full-width" appearance="fill">
+                    <span matPrefix>+569 &nbsp;</span>
+                    <mat-label>Celular Contacto</mat-label>
+                    <input autocomplete="off" matInput id="celular_contacto" name="celular_contacto" formControlName="celular_contacto">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="mb-3" style="text-align: justify;">
+                  <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Cargo Contacto</mat-label>
+                    <input autocomplete="off" matInput id="cargo_contacto" name="cargo_contacto" formControlName="cargo_contacto">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-1">
+                <button class="btn btn-info mt-2" type="submit"><i class="fa-solid fa-plus"
+                    style="color:white;"></i></button>
+              </div>
+            </div>
+          </form>
+
+
+
+
+          <div class="row">
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSort>
+
+
+                <ng-container matColumnDef="id_contacto_cliente" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+                  <td mat-cell *matCellDef="let element"> {{ element.id_contacto_cliente }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nombre" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+                  <td mat-cell *matCellDef="let element" style="text-align: start; padding-left: 10px;"> {{ element.nombre }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="correo" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> CORREO </th>
+                  <td mat-cell *matCellDef="let element" style="text-align: start; padding-left: 10px;"> {{ element.correo }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="celular" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> CELULAR </th>
+                  <td mat-cell *matCellDef="let element"> {{ element.celular }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cargo" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> CARGO </th>
+                  <td mat-cell *matCellDef="let element" style="text-align: start; padding-left: 10px;"> {{ element.cargo }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eliminar" class="table-head">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header
+                    style="width: 2% !important; margin: 0px !important">
+                    ELIMINAR </th>
+                  <td mat-cell *matCellDef="let element">
+                    <a class="btn btn-danger fa-solid fa-trash-can" style="color:white; margin: 0px !important;"
+                      (click)="deleteContactoCliente(element.id_contacto_cliente)"></a>
+                  </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="20">No hay registros</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+
+
+        </div>
+        <br>
+      </mat-dialog-content>
+
+      <mat-dialog-actions>
+        <div class="col-4">
+          <button class="btn btn-danger" style="margin-right: 15px;" mat-button mat-dialog-close>CANCELAR</button>
+          <button type="submit" class="btn btn-primary" [disabled]="clienteForm.invalid" mat-dialog-close>AGREGAR
+            CLIENTE</button>
+        </div>
+      </mat-dialog-actions>
+
+
+    </form>
+  </div>
+</div>
