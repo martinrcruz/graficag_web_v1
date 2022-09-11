@@ -18,6 +18,10 @@ export class OrdenTrabajoService {
     return this.http.get(`${this.apiUrl}${this.controllerUrl}/getOrdenTrabajo`);
   }
 
+  getOrdenTrabajoDataFiltro(filtroData: any) {
+    return this.http.post(`${this.apiUrl}${this.controllerUrl}/getOrdenTrabajoDataFiltro`, filtroData);
+  }
+
   getOrdenTrabajoTabla(filtroData: any) {
     return this.http.post(`${this.apiUrl}${this.controllerUrl}/getOrdenTrabajoTabla`, filtroData);
   }

@@ -1,0 +1,373 @@
+<div class="row mb-4 pt-3" style="background-color: #444759 !important;">
+  <div class="col-11">
+    <h2 style="font-size: 25px; color:white;">Pago orden de trabajo</h2>
+  </div>
+  <div class="col-1">
+  </div>
+</div>
+
+
+<mat-dialog-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <strong>Id Orden de Trabajo</strong> : {{ this.id_orden_trabajo }}<br>
+        <strong>Cliente</strong> : {{ this.cliente }}<br>
+
+      </div>
+      <div class="col-6">
+        <strong>Neto: </strong>  $ {{ this.addPoint(this.valor_neto) }}<br>
+        <strong>IVA: </strong>  $ {{ this.addPoint(this.valor_iva) }}<br>
+        <strong>Total: </strong>  $ {{ this.addPoint(this.valor_total) }}
+      </div>
+    </div>
+
+    <div class="row mt-3" style="background-color: rgb(204, 204, 204);">
+      <h2 style="color:black; font-weight: 600; padding-top: 10px;"> DEUDA A PAGAR: $ {{this.addPoint(this.valor_deuda)}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5 pt-2">
+      <div class="nav flex-column nav-pills me-3" id="v-pills-tab">
+
+        <button class="btn btn-pago active" id="v-pills-efectivo-tab" data-bs-toggle="pill"
+          data-bs-target="#v-pills-efectivo" type="button"> EFECTIVO </button>
+
+
+        <button class="btn btn-pago" id="v-pills-transferencia-tab" data-bs-toggle="pill"
+          data-bs-target="#v-pills-transferencia" type="button"> TRANSFERENCIA </button>
+
+
+        <button class="btn btn-pago" id="v-pills-orden-compra-tab" data-bs-toggle="pill"
+          data-bs-target="#v-pills-orden-compra" type="button"> ORDEN DE COMPRA </button>
+
+
+        <button class="btn btn-pago" id="v-pills-cheque-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cheque"
+          type="button"> CHEQUE </button>
+
+
+        <button class="btn btn-pago" id="v-pills-tarjeta-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tarjeta"
+          type="button"> TARJETA </button>
+
+
+        <button class="btn btn-pago" id="v-pills-otros-tab" data-bs-toggle="pill" data-bs-target="#v-pills-otros"
+          type="button"> OTROS </button>
+
+
+      </div>
+    </div>
+    <div class="col-7">
+      <section class="seccion-pago">
+        <div class="tab-content" id="v-pills-tabContent">
+
+          <!-- EFECTIVO -->
+          <div class="tab-pane fade show active" id="v-pills-efectivo" style="color:black">
+
+            <form [formGroup]="efectivoForm" (ngSubmit)="generatePago('efectivo')">
+              <label class="pago-label">MONTO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <span matPrefix>$ &nbsp;</span>
+                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">FECHA DE PAGO</label><br>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Seleccionar</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fecha_pago" name="fecha_pago">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <br>
+              <br>
+              <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
+              <strong> FECHA :</strong> {{this.todayDate}}<br>
+              <br>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+
+          </div>
+
+
+          <!-- TRANSFERENCIA -->
+          <div class="tab-pane fade" id="v-pills-transferencia" style="color:black">
+
+            <form [formGroup]="transferenciaForm" (ngSubmit)="generatePago('transferencia')">
+              <label class="pago-label">MONTO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <span matPrefix>$ &nbsp;</span>
+                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">FECHA DE PAGO</label><br>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Seleccionar</mat-label>
+                <input matInput [matDatepicker]="picker2" formControlName="fecha_pago" name="fecha_pago">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">BANCO DE ORIGEN</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-select formControlName="banco_origen" name="banco_origen" id="banco_origen">
+                  <mat-option value="BANCO DE CHILE">BANCO DE CHILE</mat-option>
+                  <mat-option value="SCOTIABANK CHILE">SCOTIABANK CHILE</mat-option>
+                  <mat-option value="BANCO BCI">BANCO BCI</mat-option>
+                  <mat-option value="BANCO BICE">BANCO BICE</mat-option>
+                  <mat-option value="BANCO SANTANDER">BANCO SANTANDER</mat-option>
+                  <mat-option value="BANCO ITAU">BANCO ITAU</mat-option>
+                  <mat-option value="BANCO SECURITY">BANCO SECURITY</mat-option>
+                  <mat-option value="BANCO FALABELLA">BANCO FALABELLA</mat-option>
+                  <mat-option value="BANCO RIPLEY">BANCO RIPLEY</mat-option>
+                  <mat-option value="BANCO CONSORCIO">BANCO CONSORCIO</mat-option>
+                  <mat-option value="BANCO ESTADO">BANCO ESTADO</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <br>
+              <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
+              <strong> FECHA :</strong> {{this.todayDate}}<br>
+              <br>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- ORDEN DE COMPRA -->
+          <div class="tab-pane fade" id="v-pills-orden-compra" style="color:black">
+
+            <form [formGroup]="ordenCompraForm" (ngSubmit)="generatePago('ordencompra')">
+              <label class="pago-label">MONTO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <span matPrefix>$ &nbsp;</span>
+                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">FECHA DE PAGO</label><br>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Seleccionar</mat-label>
+                <input matInput [matDatepicker]="picker3" formControlName="fecha_pago" name="fecha_pago">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">NUMERO DE ORDEN</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput type="number" formControlName="nro_orden" name="nro_orden" id="nro_orden">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">NOMBRE EMITIDO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="nombre_emitido" name="nombre_emitido" id="nombre_emitido">
+              </mat-form-field>
+
+              <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
+              <strong> FECHA :</strong> {{this.todayDate}}<br>
+              <br>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- CHEQUE -->
+          <div class="tab-pane fade" id="v-pills-cheque" style="color:black">
+            <form [formGroup]="chequeForm" (ngSubmit)="generatePago('cheque')">
+              <label class="pago-label">MONTO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <span matPrefix>$ &nbsp;</span>
+                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">FECHA A COBRAR</label><br>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Seleccionar</mat-label>
+                <input matInput [matDatepicker]="picker4" formControlName="fecha_cobro" name="fecha_cobro">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">NUMERO DE CHEQUE</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="nro_cheque" name="nro_cheque" id="nro_cheque">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">BANCO DE ORIGEN</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-select formControlName="banco_origen" name="banco_origen" id="banco_origen">
+                  <mat-option value="BANCO DE CHILE">BANCO DE CHILE</mat-option>
+                  <mat-option value="SCOTIABANK CHILE">SCOTIABANK CHILE</mat-option>
+                  <mat-option value="BANCO BCI">BANCO BCI</mat-option>
+                  <mat-option value="BANCO BICE">BANCO BICE</mat-option>
+                  <mat-option value="BANCO SANTANDER">BANCO SANTANDER</mat-option>
+                  <mat-option value="BANCO ITAU">BANCO ITAU</mat-option>
+                  <mat-option value="BANCO SECURITY">BANCO SECURITY</mat-option>
+                  <mat-option value="BANCO FALABELLA">BANCO FALABELLA</mat-option>
+                  <mat-option value="BANCO RIPLEY">BANCO RIPLEY</mat-option>
+                  <mat-option value="BANCO CONSORCIO">BANCO CONSORCIO</mat-option>
+                  <mat-option value="BANCO ESTADO">BANCO ESTADO</mat-option>
+
+                </mat-select>
+
+
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">NOMBRE TITULAR CHEQUE</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="nombre_titular" name="nombre_titular" id="nombre_titular">
+              </mat-form-field>
+
+              <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
+              <strong> FECHA :</strong> {{this.todayDate}}<br>
+              <br>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- TARJETA -->
+          <div class="tab-pane fade" id="v-pills-tarjeta" style="color:black">
+            <form [formGroup]="tarjetaForm" (ngSubmit)="generatePago('tarjeta')">
+              <label class="pago-label">MONTO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <span matPrefix>$ &nbsp;</span>
+                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">FECHA DE PAGO</label><br>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Seleccionar</mat-label>
+                <input matInput [matDatepicker]="picker5" formControlName="fecha_pago" name="fecha_pago">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">TIPO DE TARJETA</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-select formControlName="tipo_tarjeta" name="tipo_tarjeta" id="tipo_tarjeta">
+                  <mat-option value="5">TARJETA DE CREDITO</mat-option>
+                  <mat-option value="6">TARJETA DE DEBITO</mat-option>
+
+                </mat-select>
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">NUMERO DE OPERACION</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="nro_operacion" name="nro_operacion" id="nro_operacion">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">CODIGO AUTORIZACION</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="codigo_autorizacion" name="codigo_autorizacion" id="codigo_autorizacion">
+              </mat-form-field>
+
+              <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
+              <strong> FECHA :</strong> {{this.todayDate}}<br>
+              <br>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+
+          <!-- OTROS -->
+          <div class="tab-pane fade" id="v-pills-otros" style="color:black">
+            <form [formGroup]="otrosForm" (ngSubmit)="generatePago('otros')">
+              <label class="pago-label">MONTO</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <span matPrefix>$ &nbsp;</span>
+                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+              </mat-form-field>
+              <br>
+
+              <label class="pago-label">OTROS</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="otros" name="otros" id="otros">
+              </mat-form-field>
+
+              <br>
+              <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
+              <strong> FECHA :</strong> {{this.todayDate}}<br>
+              <br>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6 offset-6">
+                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                  </div>
+                </div>
+              </div>
+              <br>
+            </form>
+          </div>
+
+        </div>
+      </section>
+    </div>
+    <div class="row">
+
+
+    </div>
+
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+
+</mat-dialog-actions>

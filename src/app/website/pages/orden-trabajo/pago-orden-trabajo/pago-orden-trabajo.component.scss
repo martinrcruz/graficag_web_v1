@@ -1,0 +1,44 @@
+.btn-pago {
+  background-color: orange;
+  color: white;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-weight: 550;
+  margin: 10px;
+}
+
+.btn.active {
+  background-color: rgb(241, 241, 241);
+  color: orange;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-weight: 550;
+  margin: 10px;
+  border: none;
+}
+
+.seccion-pago {
+  border: 2px solid black;
+  border-radius: 7px;
+  margin: 20px 10px 10px 10px;
+  padding: 10px;
+}
+
+.tab-pane {
+  margin: 20px 40px 20px 40px;
+}
+
+
+.pago-label {
+  font-weight: 550;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// :host ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
+//   padding: 0px !important;
+// }

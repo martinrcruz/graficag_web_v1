@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { CotizacionPdfComponent } from './cotizacion-pdf/cotizacion-pdf.component';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { TablaPdfComponent } from './tabla-pdf/tabla-pdf.component';
+import { PagoCotizacionComponent } from './pago-cotizacion/pago-cotizacion.component';
 
 
 
@@ -134,6 +135,16 @@ export class CotizacionComponent implements OnInit {
         }
       })
   }
+
+  openPagoCotizacion(id_cotizacion: any){
+    const dialogRef = this.dialog.open(PagoCotizacionComponent, {
+      width: "1000px",
+      data: {
+        id_cotizacion: id_cotizacion
+      }
+    })
+  }
+
 
 
   filtroData = new FormGroup({

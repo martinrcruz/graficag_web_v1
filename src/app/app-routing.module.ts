@@ -1,5 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './website/auth/login/login.component';
 import { LayoutComponent } from './website/layout/layout.component';
 import { CategoriaComponent } from './website/pages/categoria/categoria.component';
 import { ClienteComponent } from './website/pages/cliente/cliente.component';
@@ -20,8 +22,14 @@ import { TipoValorComponent } from './website/pages/tipo-valor/tipo-valor.compon
 import { UsuariosComponent } from './website/pages/usuarios/usuarios.component';
 
 const routes: Routes = [
-
-
+  {
+    path: 'auth/login',
+    component: LoginComponent,
+  },
+  // {
+  //   path: 'auth/forgot-password',
+  //   component: ForgotPasswordComponent,
+  // },
   {
     path: '',
     component: LayoutComponent,
@@ -36,70 +44,87 @@ const routes: Routes = [
       },
       {
         path: 'home',
+        canActivate: [AuthGuard],
         component: HomeComponent
       },
       {
         path: 'categoria',
+        canActivate: [AuthGuard],
         component: CategoriaComponent
       },
       {
         path: 'cliente',
+        canActivate: [AuthGuard],
         component: ClienteComponent
       },
       {
         path: 'cotizacion',
+        canActivate: [AuthGuard],
         component: CotizacionComponent,
       },
       {
         path: 'add-cotizacion',
+        canActivate: [AuthGuard],
         component: AddCotizacionComponent
       },
       {
         path: 'edit-cotizacion',
+        canActivate: [AuthGuard],
         component: EditCotizacionComponent
       },
       {
         path: 'empresa',
+        canActivate: [AuthGuard],
         component: EmpresaComponent
       },
       {
         path: 'forma-pago',
+        canActivate: [AuthGuard],
         component: FormaPagoComponent
       },
       {
         path: 'orden-trabajo',
+        canActivate: [AuthGuard],
         component: OrdenTrabajoComponent
       },
       {
         path: 'add-orden-trabajo',
+        canActivate: [AuthGuard],
         component: AddOrdenTrabajoComponent
       },
       {
         path: 'edit-orden-trabajo',
+        canActivate: [AuthGuard],
         component: EditOrdenTrabajoComponent
       },
       {
         path: 'producto',
+        canActivate: [AuthGuard],
         component: ProductoComponent
       },
       {
         path: 'proveedor',
+        canActivate: [AuthGuard],
         component: ProveedorComponent
       },
       {
         path: 'reporte',
+        canActivate: [AuthGuard],
         component: ReporteComponent
       },
       {
         path: 'terminacion',
+        canActivate: [AuthGuard],
         component: TerminacionComponent
       },
       {
         path: 'tipo-valor',
+        canActivate: [AuthGuard],
         component: TipoValorComponent
       },
       {
         path: 'usuarios',
+        canActivate: [AuthGuard],
         component: UsuariosComponent
       },
 
@@ -109,7 +134,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    {
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+      initialNavigation: 'enabledBlocking'
+      // relativeLinkResolution: 'legacy'
+    }
+  )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

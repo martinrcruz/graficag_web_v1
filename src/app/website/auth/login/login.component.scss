@@ -1,0 +1,33 @@
+.center {
+  padding-top: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+
+.input-login {
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+  border-radius: 8px;
+  border: 1px solid grey;
+}
+
+.btn-login {
+  width: 100%;
+  background-color: #444759 !important;
+  color: white !important;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 25px 10px 25px;
+}
+
+.btn-forgot {
+  width: 100%;
+  background-color: rgb(224, 179, 28) !important;
+  color: white !important;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 10px 10px 10px;
+  font-weight: 550;
+}

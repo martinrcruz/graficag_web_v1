@@ -18,6 +18,7 @@ import { TiempoEntregaService } from 'src/app/services/tiempo-entrega.service';
 import { SelectClienteComponent } from '../select-cliente/select-cliente.component';
 import { CotizacionPdfComponent } from '../cotizacion-pdf/cotizacion-pdf.component';
 import { TipoValorService } from 'src/app/services/tipo-valor.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class AddCotizacionComponent implements OnInit {
     private cotizacionService: CotizacionService,
     private tipoValorService: TipoValorService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
 
@@ -119,7 +121,7 @@ export class AddCotizacionComponent implements OnInit {
     this.getMetodoPago();
     this.getTipoImpuesto();
     this.getTiempoEntrega();
-
+    this.getUserData()
   }
 
 
@@ -486,6 +488,24 @@ export class AddCotizacionComponent implements OnInit {
   }
 
 
+  usuario = {
+    nombre: "",
+    id: "",
+    tipo: ""
+  }
+  getUserData() {
+    this.auth.isLoggedIn()
+      .subscribe({
+        next: (res) => {
+          var data = Object.entries(res)
+          var userData = data[1][1][0]
+
+          this.usuario.nombre = userData.nombre
+          this.usuario.id = userData.id_usuario
+        }
+      })
+  }
+
   cotizacionForm = new FormGroup({
     observacion: new FormControl(),
     id_tiempo_entrega: new FormControl('', Validators.required),
@@ -497,7 +517,7 @@ export class AddCotizacionComponent implements OnInit {
   saveCotizacion() {
     var formData: any = new FormData();
     formData.append("id_cliente", this.cliente.id_cliente);
-    formData.append("id_usuario", 1); //cambiar por usuario en sesion
+    formData.append("id_usuario", this.usuario.id); //cambiar por usuario en sesion
     formData.append("id_tiempo_entrega", this.cotizacionForm.get("id_tiempo_entrega")?.value);
     formData.append("id_forma_pago", this.cotizacionForm.get("id_forma_pago")?.value);
     formData.append("id_tipo_impuesto", this.cotizacionForm.get("id_tipo_impuesto")?.value);
@@ -655,6 +675,7 @@ export class AddCotizacionComponent implements OnInit {
         dataSource: this.dataSource,
         tipo_impuesto: this.tipoImpuesto,
         formaPago: this.formaPago,
+        descuento: this.descuento,
         tiempoEntrega: this.tiempoEntrega,
         valorSumaNeto: this.valorSumaNeto,
         valorSumaIVA: this.valorSumaIVA,

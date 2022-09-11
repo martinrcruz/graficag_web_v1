@@ -70,6 +70,11 @@ import { AddDetalleOrdenTrabajoComponent } from './website/pages/orden-trabajo/m
 import { EditDetalleOrdenTrabajoComponent } from './website/pages/orden-trabajo/modal/edit-detalle-orden-trabajo/edit-detalle-orden-trabajo.component';
 import { TablaPdfComponent } from './website/pages/cotizacion/tabla-pdf/tabla-pdf.component';
 import { TerminacionOTComponent } from './website/pages/orden-trabajo/add-orden-trabajo/terminacion/terminacion.component';
+import { OrdenTrabajoPdfComponent } from './website/pages/orden-trabajo/orden-trabajo-pdf/orden-trabajo-pdf.component';
+import { TablaOtPdfComponent } from './website/pages/orden-trabajo/tabla-ot-pdf/tabla-ot-pdf.component';
+import { PagoCotizacionComponent } from './website/pages/cotizacion/pago-cotizacion/pago-cotizacion.component';
+import { PagoOrdenTrabajoComponent } from './website/pages/orden-trabajo/pago-orden-trabajo/pago-orden-trabajo.component';
+import { LoginComponent } from './website/auth/login/login.component';
 
 
 
@@ -128,7 +133,12 @@ import { TerminacionOTComponent } from './website/pages/orden-trabajo/add-orden-
     AddDetalleOrdenTrabajoComponent,
     EditDetalleOrdenTrabajoComponent,
     TablaPdfComponent,
-    TerminacionOTComponent
+    TerminacionOTComponent,
+    OrdenTrabajoPdfComponent,
+    TablaOtPdfComponent,
+    PagoCotizacionComponent,
+    PagoOrdenTrabajoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

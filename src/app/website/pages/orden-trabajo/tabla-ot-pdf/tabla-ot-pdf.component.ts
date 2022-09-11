@@ -4,15 +4,15 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 @Component({
-  selector: 'app-tabla-pdf',
-  templateUrl: './tabla-pdf.component.html',
-  styleUrls: ['./tabla-pdf.component.scss']
+  selector: 'app-tabla-ot-pdf',
+  templateUrl: './tabla-ot-pdf.component.html',
+  styleUrls: ['./tabla-ot-pdf.component.scss']
 })
-export class TablaPdfComponent implements OnInit {
+export class TablaOtPdfComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<TablaPdfComponent>,
+    public dialogRef: MatDialogRef<TablaOtPdfComponent>,
   ) { }
 
   dataSource: any
@@ -24,13 +24,14 @@ export class TablaPdfComponent implements OnInit {
   }
 
 
-  @ViewChild('pdfTable')
-  pdfTable!: ElementRef;
-  displayedColumnsPdf: string[] = ['id_cotizacion', 'nombre_cliente', 'email_cliente', 'rut_empresa', 'nombre_empresa', 'fecha_cotizacion', 'nro_item', 'nro_cantidad', 'tipo_impuesto', 'total_neto', 'total_iva', 'total', 'ultima_ot'];
+
+
+  @ViewChild('tablaOTPdf') tablaOTPdf!: ElementRef;
+  displayedColumnsPdf: string[] = ['id_orden_trabajo', 'nombre_cliente', 'email_cliente', 'rut_empresa', 'nombre_empresa', 'fecha_orden_trabajo', 'nro_item', 'nro_cantidad', 'tipo_impuesto', 'total_neto', 'total_iva', 'total', 'ultima_ot'];
 
 
   downloadAsPDF() {
-    html2canvas(this.pdfTable.nativeElement, { scale: 3 }).then(function (canvas) {
+    html2canvas(this.tablaOTPdf.nativeElement, { scale: 3 }).then(function (canvas) {
       canvas.getContext('2d');
       var HTML_Width = canvas.width;
       var HTML_Height = canvas.height;
@@ -66,6 +67,8 @@ export class TablaPdfComponent implements OnInit {
     });
   };
 
+
+
   addPoint(string: any) {
     string += '';
 
@@ -82,5 +85,4 @@ export class TablaPdfComponent implements OnInit {
     }
     return x1 + x2;
   }
-
 }

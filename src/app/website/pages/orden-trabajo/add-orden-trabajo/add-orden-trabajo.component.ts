@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { FormaPagoService } from 'src/app/services/forma-pago.service';
 import { OrdenTrabajoService } from 'src/app/services/orden-trabajo.service';
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
 import { SelectClienteComponent } from '../../cotizacion/select-cliente/select-cliente.component';
 import { AddDetalleOrdenTrabajoComponent } from '../modal/add-detalle-orden-trabajo/add-detalle-orden-trabajo.component';
 import { EditDetalleOrdenTrabajoComponent } from '../modal/edit-detalle-orden-trabajo/edit-detalle-orden-trabajo.component';
+import { OrdenTrabajoPdfComponent } from '../orden-trabajo-pdf/orden-trabajo-pdf.component';
 
 
 @Component({
@@ -42,7 +44,8 @@ export class AddOrdenTrabajoComponent implements OnInit {
     private ordenTrabajoService: OrdenTrabajoService,
     private tipoValorService: TipoValorService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
 
@@ -115,6 +118,7 @@ export class AddOrdenTrabajoComponent implements OnInit {
     this.getMetodoPago();
     this.getTipoImpuesto();
     this.getTiempoEntrega();
+    this.getUserData()
   }
 
 
@@ -221,6 +225,24 @@ export class AddOrdenTrabajoComponent implements OnInit {
   }
 
 
+  usuario = {
+    nombre: "",
+    id: "",
+    tipo: ""
+  }
+  getUserData() {
+    this.auth.isLoggedIn()
+      .subscribe({
+        next: (res) => {
+          var data = Object.entries(res)
+          var userData = data[1][1][0]
+
+          this.usuario.nombre = userData.nombre
+          this.usuario.id = userData.id_usuario
+        }
+      })
+  }
+
   orden_trabajoForm = new FormGroup({
     observacion: new FormControl(),
     id_tiempo_entrega: new FormControl('', Validators.required),
@@ -232,7 +254,7 @@ export class AddOrdenTrabajoComponent implements OnInit {
   saveOrdenTrabajo() {
     var formData: any = new FormData();
     formData.append("id_cliente", this.cliente.id_cliente);
-    formData.append("id_usuario", 1);
+    formData.append("id_usuario", this.usuario.id);
     formData.append("id_tiempo_entrega", this.orden_trabajoForm.get("id_tiempo_entrega")?.value);
     formData.append("id_forma_pago", this.orden_trabajoForm.get("id_forma_pago")?.value);
     formData.append("id_tipo_impuesto", this.orden_trabajoForm.get("id_tipo_impuesto")?.value);
@@ -604,15 +626,31 @@ export class AddOrdenTrabajoComponent implements OnInit {
 
   }
 
-
-
-
-
-
-
   openPdf() {
-
+    const dialogRef = this.dialog.open(OrdenTrabajoPdfComponent, {
+      data: {
+        id_orden_trabajo: this.orden_trabajo.new_id,
+        nombre_cliente: this.cliente.nombre_cliente,
+        correo_cliente: this.cliente.correo,
+        celular_cliente: this.cliente.celular,
+        nombre_empresa: this.cliente.nombre_empresa,
+        rut_empresa: this.cliente.rut_empresa,
+        direccion_empresa: this.cliente.direccion_empresa,
+        dataSource: this.dataSource,
+        tipo_impuesto: this.tipoImpuesto,
+        formaPago: this.formaPago,
+        descuento: this.descuento,
+        tiempoEntrega: this.tiempoEntrega,
+        valorSumaNeto: this.valorSumaNeto,
+        valorSumaIVA: this.valorSumaIVA,
+        valorSumaTotal: this.valorSumaTotal,
+        observacion: this.orden_trabajoForm.get("observacion")?.value,
+        descripcionFormaPago: this.descripcionFormaPago,
+        descripcionTiempoEntrega: this.descripcionTiempoEntrega
+      }
+    })
   }
+
   addPoint(string: any) {
     string += '';
 

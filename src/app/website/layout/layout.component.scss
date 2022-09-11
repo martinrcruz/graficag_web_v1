@@ -6,7 +6,7 @@
 .hora {
     padding-top: 20px;
     font-size: 46px;
-    padding-left: 40px;
+    padding-left: 20px;
     font-weight: 500;
     padding-bottom: 0px;
     margin-bottom: 0px;
@@ -16,6 +16,8 @@
     font-size: 36px;
     padding-top: 0px;
     margin-top: 20px;
+    padding-left: 20px;
+
 }
 
 .profile-img {
@@ -28,6 +30,9 @@
     
 }
 
+.btn.active {
+    background-color: white !important;
+}
 
 .nav-item {
     background-color: rgb(196, 196, 196, 16%);
@@ -46,14 +51,6 @@
     padding: 1px 20px 1px 20px;
 }
 
-.nav-item:active {
-    background-color: rgba(196, 196, 196, 0.719);
-    transition: 0.3s;
-    color: white;
-    margin: 1px 4px 1px 4px;
-    border-radius: 15px;
-    padding: 1px 20px 1px 20px;
-}
 
 .navbar {
     background-color: #444759 !important;
@@ -64,3 +61,34 @@
     justify-content: center !important;
     align-items: center !important;
 }
+
+.activated {
+    background-color: rgba(255, 255, 255, 0.521);
+    transition: 0.3s;
+    margin: 1px 4px 1px 4px;
+    border-radius: 15px;
+    padding: 1px 20px 1px 20px;
+}
+
+
+.activated-drop {
+    background-color: #444759;
+    color: white !important;
+    transition: 0.3s;
+    padding: 10px 20px 10px 20px;
+}
+
+.dropdown-item :hover {
+    background-color: #444759;
+}
+
+.dropdown-item :active {
+    background-color: #444759;
+}
+.dropdown-item :focus {
+    background-color: #444759;
+}
+
+// ::marker {
+//     display: none !important;
+// }

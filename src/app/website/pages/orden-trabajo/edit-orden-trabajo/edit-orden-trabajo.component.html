@@ -136,7 +136,7 @@
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
 
-          <ng-container matColumnDef="editar" class="table-head">
+          <ng-container matColumnDef="editar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> EDITAR </th>
             <td mat-cell *matCellDef="let element">
               {{element.id_detalle_orden_trabajo}}
@@ -152,7 +152,7 @@
             <td mat-cell *matCellDef="let element"> {{element.id_detalle_orden_trabajo}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="id_producto" class="table-head">
+          <ng-container matColumnDef="id_producto">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ID PRODUCTO </th>
             <td mat-cell *matCellDef="let element"> {{element.id_producto}} </td>
           </ng-container>
@@ -163,63 +163,63 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="descripcion" class="table-head">
+          <ng-container matColumnDef="descripcion">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30% !important;"> DESCRIPCION </th>
             <td mat-cell *matCellDef="let element" style="text-align:start; padding-left: 10px;">
               {{element.descripcion_producto}}, {{element.descripcion}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="cantidad" class="table-head">
+          <ng-container matColumnDef="cantidad">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> CANTIDAD </th>
             <td mat-cell *matCellDef="let element"> {{element.cantidad}} un. </td>
           </ng-container>
 
-          <ng-container matColumnDef="ancho" class="table-head">
+          <ng-container matColumnDef="ancho">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ANCHO </th>
             <td mat-cell *matCellDef="let element"> {{element.ancho}} cm. </td>
           </ng-container>
 
-          <ng-container matColumnDef="alto" class="table-head">
+          <ng-container matColumnDef="alto">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ALTO </th>
             <td mat-cell *matCellDef="let element"> {{element.alto}} cm. </td>
           </ng-container>
 
-          <ng-container matColumnDef="area" class="table-head">
+          <ng-container matColumnDef="area">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> AREA </th>
             <td mat-cell *matCellDef="let element"> {{element.area}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="terminaciones" class="table-head">
+          <ng-container matColumnDef="terminaciones">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20% !important;"> TERMINACIONES </th>
             <td mat-cell *matCellDef="let element"> {{element.terminaciones}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="tipo_valor" class="table-head">
+          <ng-container matColumnDef="tipo_valor">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO VALOR </th>
             <td mat-cell *matCellDef="let element"> {{element.tipo_valor}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="valor_m2" class="table-head">
+          <ng-container matColumnDef="valor_m2">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR M2 </th>
             <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_m2) }} </td>
           </ng-container>
 
-          <ng-container matColumnDef="valor_unidad" class="table-head">
+          <ng-container matColumnDef="valor_unidad">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR UN. </th>
             <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_unidad) }} </td>
           </ng-container>
 
-          <ng-container matColumnDef="valor_adicional" class="table-head">
+          <ng-container matColumnDef="valor_adicional">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR ADICIONAL </th>
             <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_adicional) }} </td>
           </ng-container>
 
-          <ng-container matColumnDef="valor_total" class="table-head">
+          <ng-container matColumnDef="valor_total">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6% !important;"> VALOR TOTAL </th>
             <td mat-cell *matCellDef="let element"> $ {{ this.addPoint(element.valor_total) }} </td>
           </ng-container>
 
-          <ng-container matColumnDef="eliminar" class="table-head">
+          <ng-container matColumnDef="eliminar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 2% !important; margin: 0px !important">
               ELIMINAR </th>
             <td mat-cell *matCellDef="let element">
@@ -362,6 +362,155 @@
 
           </div>
         </div>
+
+
+        <div class="row" style="margin:40px 40px 0px 40px;">
+          <div class="container">
+            <div class="row" style="background-color: orange;">
+              <div class="col-10">
+                <h2 style="color: white; padding: 10px 0px 0px 0px; font-size: 24px; font-weight: 550;">DETALLE PAGOS
+                </h2>
+              </div>
+              <div class="col-2 mt-2">
+                <button class="btn btn-pago" (click)="openPago()" type="button">Generar Pago</button>
+              </div>
+            </div>
+            <div class="row">
+              <!-- AQUI VA LA TABLA QUE MUESTRA LOS PAGOS-->
+              <div class="mat-elevation-z8" style="border-radius: 0px !important;">
+                <table mat-table [dataSource]="dataSourcePago" matSort>
+
+                  <ng-container matColumnDef="id_pago" style="display:none;">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> ID PAGO </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.id_pago}} </td>
+                  </ng-container>
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="tipo_pago" style="display:none;">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> TIPO DE PAGO </th>
+                    <td mat-cell *matCellDef="let element"> {{ setTipoPago(element.tipo_pago)}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="monto">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> MONTO </th>
+                    <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="fecha_pago" class="table-head-producto">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> FECHA PAGO </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fecha_pago}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="banco_origen">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> BANCO ORIGEN </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.banco_origen}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="nro_orden">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> NRO ORDEN </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nro_orden}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="fecha_cobro">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> FECHA A COBRAR </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fecha_cobro}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="nro_cheque">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> NRO CHEQUE </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nro_cheque}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="nombre_titular">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> NOMBRE TITULAR CHEQUE </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre_titular_cheque}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="tipo_tarjeta">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> TIPO DE TARJETA </th>
+                    <td mat-cell *matCellDef="let element"> {{ setTipoTarjeta(element.tipo_pago)}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="nro_operacion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> NUMERO OPERACION </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nro_operacion}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="codigo_autorizacion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> CODIGO AUTORIZACION </th>
+                    <td mat-cell *matCellDef="let element">{{ element.codigo_autorizacion }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="otros">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> OTROS </th>
+                    <td mat-cell *matCellDef="let element">{{ element.otros }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="trabajador">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> TRABAJADOR </th>
+                    <td mat-cell *matCellDef="let element">{{ element.nombre_trabajador }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="background-color: white !important; color: grey"> FECHA </th>
+                    <td mat-cell *matCellDef="let element">{{ element.fecha }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="eliminar">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                      style="width: 2% !important; margin: 0px !important; background-color: white !important; color: grey">
+                      ELIMINAR </th>
+                    <td mat-cell *matCellDef="let element">
+                      <a class="btn btn-danger fa-solid fa-trash-can" style="color:white; margin: 0px !important;"
+                        (click)="deletePago(element.id_pago)"></a>
+                    </td>
+                  </ng-container>
+
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsPago"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsPago;"></tr>
+
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="20" style="color: black !important">No hay registros</td>
+                  </tr>
+                </table>
+
+                <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator> -->
+              </div>
+            </div>
+
+            <div class="row" style="background-color: orange; padding-top: 15px;">
+              <div class="col-3">
+                <h3 style="color: white !important; font-weight: 550;">TOTAL:  $ {{this.addPoint(this.valor_total)}} </h3>
+              </div>
+              <div class="col-3">
+                <h3 style="color: white !important; font-weight: 550;">ABONO:  $ {{this.addPoint(this.valor_abono)}} </h3>
+              </div>
+              <div class="col-4">
+                <h3 style="color: white !important; font-weight: 550;">DEUDA A PAGAR:  $ {{this.addPoint(this.valor_deuda)}} </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div class="row fila-botones flex-nowrap">
           <div class="col">
 
@@ -369,8 +518,8 @@
               ELIMINAR
             </button>
 
-            <button class="btn btn-agregar" type="submit" [disabled]="orden_trabajoForm.invalid || !this.isClienteSelected"
-              style="font-size: 24px;">
+            <button class="btn btn-agregar" type="submit"
+              [disabled]="orden_trabajoForm.invalid || !this.isClienteSelected" style="font-size: 24px;">
               EDITAR COTIZACION
             </button>
           </div>

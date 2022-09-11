@@ -273,7 +273,8 @@ export class EditCotizacionComponent implements OnInit {
           this.onChangeMetodoPago(null, this.editData.data[0].id_forma_pago)
           this.onChangeTiempoEntrega(null, this.editData.data[0].id_tiempo_entrega)
           this.tipo_impuesto = this.editData.data[0].id_tipo_impuesto
-          this.tipoImpuesto = this.editData.data[0].nombre_tipo_impuesto
+          this.tipoImpuesto = this.editData.data[0].tipo_impuesto
+          console.log(this.tipoImpuesto)
           this.observacion = this.editData.data[0].observacion
           this.getCalculosDetalleCotizacion();
 
@@ -661,6 +662,7 @@ export class EditCotizacionComponent implements OnInit {
         dataSource: this.dataSource,
         tipo_impuesto: this.tipoImpuesto,
         formaPago: this.formaPago,
+        descuento: this.descuento,
         tiempoEntrega: this.tiempoEntrega,
         valorSumaNeto: this.valorSumaNeto,
         valorSumaIVA: this.valorSumaIVA,

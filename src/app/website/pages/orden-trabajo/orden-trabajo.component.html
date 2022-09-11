@@ -16,7 +16,6 @@
           style="font-size: 28px; font-weight: 500; "> AGREGAR ORDEN DE TRABAJO </button>
       </div>
     </div>
-
   </div>
 
   <div class="row">
@@ -52,44 +51,41 @@
 
             <div class="col-2">
               <i class="fa-solid fa-filter"></i>
-              <p style="display: inline; padding-left:6px;">Selecciona un filtro: </p>
+              <p style="display: inline; padding-left:6px;">Tipo de impuesto: </p>
               <mat-form-field appearance="fill">
-                <mat-label>Selecciona un filtro</mat-label>
-                <mat-select>
-                  <mat-option value="1">1</mat-option>
-                  <mat-option value="2">2</mat-option>
-                  <mat-option value="3">3</mat-option>
-                  <mat-option value="4">4</mat-option>
+                <mat-label>Selecciona un tipo de impuesto</mat-label>
+                <mat-select matNativeControl formControlName="id_tipo_impuesto" name="id_tipo_impuesto"
+                  id="id_tipo_impuesto">
+                  <mat-option *ngFor="let datoTipoImpuesto of selectorTipoImpuesto"
+                    value="{{ datoTipoImpuesto.id_tipo_impuesto }}">{{datoTipoImpuesto.nombre}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
 
-            <div class="col-2">
-              <i class="fa-solid fa-filter"></i>
-              <p style="display: inline; padding-left:6px;">Selecciona un filtro: </p>
-              <mat-form-field appearance="fill">
-                <mat-label>Selecciona un filtro</mat-label>
-                <mat-select>
-                  <mat-option value="1">1</mat-option>
-                  <mat-option value="2">2</mat-option>
-                  <mat-option value="3">3</mat-option>
-                  <mat-option value="4">4</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
 
-            <div class="col-2">
-              <i class="fa-solid fa-filter"></i>
-              <p style="display: inline; padding-left:6px;">Selecciona un filtro: </p>
-              <mat-form-field appearance="fill">
-                <mat-label>Selecciona un filtro</mat-label>
-                <mat-select>
-                  <mat-option value="1">1</mat-option>
-                  <mat-option value="2">2</mat-option>
-                  <mat-option value="3">3</mat-option>
-                  <mat-option value="4">4</mat-option>
-                </mat-select>
-              </mat-form-field>
+            <div class="col-4">
+              <div class="container">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="indicador-titulo">TOTAL NETO</div>
+                    <div class="indicador-valor">
+                      <p> $ {{ this.addPoint(this.total_neto_filtro) }}</p>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="indicador-titulo">TOTAL IVA</div>
+                    <div class="indicador-valor">
+                      <p> $ {{ this.addPoint(this.total_iva_filtro) }}</p>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="indicador-titulo">VALOR TOTAL</div>
+                    <div class="indicador-valor">
+                      <p> $ {{ this.addPoint(this.total_filtro) }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-2">
@@ -104,7 +100,6 @@
               </div>
             </div>
 
-
           </div>
         </div>
       </form>
@@ -115,7 +110,12 @@
   <div class="row">
     <div class="col-3">
     </div>
-    <div class="col-3 offset-6">
+    <div class="col-1 offset-5 pt-4">
+      <div class="pdf-button" style="padding-left: 60px;">
+        <i class="fa-sharp fa-solid fa-print fa-2xl" (click)="tablaPdf()"></i>
+      </div>
+    </div>
+    <div class="col-3">
       <mat-form-field appearance="standard">
         <mat-label>Buscar</mat-label>
         <input matInput (keyup)="applyFilter($event)" #input>
@@ -130,11 +130,20 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
         <td mat-cell *matCellDef="let element" style="font-size: 13px;"> <strong
             style="font-size: 13px;">{{element.id_orden_trabajo}} </strong> </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
 
       <ng-container matColumnDef="id_cliente" class="table-head" style="display: none;">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID CLI. </th>
         <td mat-cell *matCellDef="let element"> </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado_orden" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO ORDEN </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.estado_orden}} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
       <ng-container matColumnDef="nombre_cliente" class="table-head">
@@ -142,6 +151,7 @@
         <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 13px;">
           <strong style="font-size: 13px;">{{element.id_cliente}}</strong> - {{element.nombre_cliente}}
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
 
       <ng-container matColumnDef="email_cliente" class="table-head">
@@ -149,11 +159,15 @@
         <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 13px;">
           <strong style="font-size: 13px;">{{element.email_cliente}}</strong>
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
       <ng-container matColumnDef="rut_empresa" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> RUT EMPRESA </th>
         <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.rut_empresa}} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
       <ng-container matColumnDef="nombre_empresa" class="table-head">
@@ -161,74 +175,118 @@
         <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 13px;">
           {{element.nombre_empresa}}
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
       <ng-container matColumnDef="fecha_orden_trabajo" class="table-head">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA COTIZACION </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA OT </th>
         <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.fecha_orden_trabajo}} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
       <ng-container matColumnDef="nro_item" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> N° ITEM </th>
         <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.nro_item}} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
 
       <ng-container matColumnDef="nro_cantidad" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> N° CANT. </th>
         <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.nro_cantidad}} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
 
-      <ng-container matColumnDef="tipo_impuesto" class="table-head">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO IMPUESTO </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.tipo_impuesto }} </td>
+      <ng-container matColumnDef="tiempo_entrega" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> TIEMPO ENTREGA </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.tiempo_entrega}} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="forma_pago" class="table-head">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> FORMA PAGO </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.forma_pago }} </td>
-      </ng-container> -->
+      <ng-container matColumnDef="producto_entregado" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PRODUCTO ENTREGADO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.producto_entregado }} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+      </ng-container>
 
+      <ng-container matColumnDef="producto_pendiente" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PRODUCTO PENDIENTE </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.producto_pendiente }} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="descuento" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCUENTO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.descuento }} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+      </ng-container>
 
 
       <ng-container matColumnDef="total_neto" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL NETO </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> $ {{ this.addPoint(element.total_neto) }} </td>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; background-color: rgb(255, 255, 210);"> $ {{
+          this.addPoint(element.total_neto) }} </td>
+        <td mat-footer-cell *matFooterCellDef
+          style="border: none; border-right: 1px solid white; background-color: rgb(255, 255, 210);"> Total </td>
       </ng-container>
 
       <ng-container matColumnDef="total_iva" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL IVA </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> $ {{ this.addPoint(element.total_iva) }} </td>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; background-color: rgb(255, 255, 210);"> $ {{
+          this.addPoint(element.total_iva) }} </td>
+        <td mat-footer-cell *matFooterCellDef
+          style="border: none; border-right: 1px solid white; background-color: rgb(255, 255, 210);"> Total </td>
       </ng-container>
 
       <ng-container matColumnDef="total" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> $ {{ this.addPoint(element.total) }} </td>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; background-color: rgb(255, 255, 210);"> $ {{
+          this.addPoint(element.total) }} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none; background-color: rgb(255, 255, 210);"> Total </td>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="deuda" class="table-head">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> DEUDA </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> $ {{ this.addPoint(element.deuda) }} </td>
-      </ng-container> -->
-
-      <ng-container matColumnDef="fecha_ultima_ot" class="table-head">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ULTIMA OT - ID </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.fecha_ultima_ot}} <strong
-            style="font-size: 13px;"> - {{element.id_ot}}</strong> </td>
+      <ng-container matColumnDef="primer_abono" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PRIMER ABONO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.primer_abono }} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
 
-      <ng-container matColumnDef="id_ot" class="table-head" style="display: none;">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID ULTIMA OT </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> </td>
+
+      <ng-container matColumnDef="forma_pago" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> FORMA PAGO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.forma_pago }} </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
       </ng-container>
+
+      <ng-container matColumnDef="abono" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ABONO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; background-color: rgb(210, 245, 255);">
+          $  </td>
+        <td mat-footer-cell *matFooterCellDef
+          style="border: none; border-right: 1px solid white; background-color: rgb(210, 245, 255);"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="deuda_total" class="table-head">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DEUDA TOTAL </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; background-color: rgb(255, 255, 210);">
+          $ {{this.addPoint(element.deuda)}} </td>
+        <td mat-footer-cell *matFooterCellDef
+          style="border: none; border-right: 1px solid white; background-color: rgb(255, 255, 210);"></td>
+      </ng-container>
+
 
       <ng-container matColumnDef="gestionar" class="table-head" style="display: none;">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> PAGO </th>
         <td mat-cell *matCellDef="let element">
           <div
-            style="background-color: rgb(39, 98, 175); padding: 5px 5px 5px 5px; margin: 10px 10px 10px 10px; border-radius: 6px;">
+            style="background-color: rgb(39, 98, 175); padding: 5px 5px 5px 5px; margin: 10px 10px 10px 10px; border-radius: 6px;"
+            (click)="openPago(element.id_orden_trabajo)">
             <i class="fa-solid fa-money-check-dollar fa-lg" style="color:white;"></i>
           </div>
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
 
@@ -239,25 +297,10 @@
               style="height: 40px; display: block; margin-left: auto; margin-right: auto;"
               (click)="openPdf(element.id_orden_trabajo)"></div>
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
-
-      <ng-container matColumnDef="enviado_correo" class="table-head">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> CORREO ENVIADO </th>
-        <td mat-cell *matCellDef="let element">
-
-          <div *ngIf="element.enviado_correo == 1"
-            style="background-color: rgb(41, 155, 41); padding: 5px 0px 5px 0px; margin: 10px 20px 10px 20px; border-radius: 6px;">
-            <i class="fa-solid fa-envelope-circle-check fa-lg" style="color: white;"></i>
-          </div>
-
-          <div *ngIf="element.enviado_correo == 0"
-            style="background-color: rgb(192, 61, 61); padding: 5px 0px 5px 0px; margin: 10px 20px 10px 20px; border-radius: 6px;">
-            <i class="fa-solid fa-envelope fa-lg" style="color: white;"></i>
-          </div>
-
-        </td>
-      </ng-container>
 
       <ng-container matColumnDef="editar" class="table-head">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> EDITAR </th>
@@ -266,6 +309,8 @@
             (click)="updateOrdenTrabajo(element.id_orden_trabajo, element.id_cliente)"></a>
 
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
       <ng-container matColumnDef="eliminar" class="table-head">
@@ -275,11 +320,14 @@
             (click)="deleteOrdenTrabajo(element.id_orden_trabajo)"></a>
 
         </td>
+        <td mat-footer-cell *matFooterCellDef style="border: none;"></td>
+
       </ng-container>
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>

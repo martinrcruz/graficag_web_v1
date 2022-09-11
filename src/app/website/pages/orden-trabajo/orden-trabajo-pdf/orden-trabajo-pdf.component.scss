@@ -11,6 +11,8 @@
   // margin-right: 5%;
 }
 
+
+
 table {
   width: 100%;
   border-radius: 5px;
@@ -62,8 +64,8 @@ th {
 }
 
 th {
-  background-color: #444759 !important;
-  color: white;
+  // background-color: #444759 !important;
+  color: black !important;
   text-align: center !important;
   padding-left: 10px !important;
 }
@@ -139,7 +141,7 @@ th {
 }
 
 .mat-column-descripcion {
-  width: 30% !important;
+  width: 15% !important;
 }
 
 .mat-column-producto {
@@ -202,6 +204,7 @@ th {
   color: white;
 }
 
+
 .contenedor-row {
   background-color: #f3f3f3;
   border-radius: 6px;
@@ -218,7 +221,7 @@ th {
 }
 
 .box-id-title {
-  font-size: 20px;
+  font-size: 25px;
   padding: 12px 12px 0px 12px;
   text-align: center;
 }
@@ -246,7 +249,7 @@ th {
 }
 
 .box-date-hora {
-  font-size: 34px;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -262,7 +265,7 @@ th {
   text-align: center;
   font-weight: 500;
   padding-top: 5px;
-  font-size: 18px;
+  font-size: 25px;
 
 }
 
@@ -287,7 +290,7 @@ th {
   text-align: center;
   font-weight: 500;
   padding-top: 5px;
-  font-size: 18px;
+  font-size: 25px;
 }
 
 .box-contact-textblock {
@@ -310,7 +313,7 @@ th {
   text-align: center;
   font-weight: 500;
   padding-top: 5px;
-  font-size: 18px;
+  font-size: 25px;
 }
 
 .box-history-textblock {
@@ -443,7 +446,6 @@ th {
   font-size: 20px;
 }
 
-
 .pdf-button {
   border: none;
   background-color: white;
@@ -476,15 +478,4 @@ th {
   background-color: #FFB400;
   color: white;
   margin-right: 10px;
-}
-
-
-.btn-pago {
-  background-color: white;
-  color: orange;
-  border-radius: 6px;
-  font-size:18px;
-  font-weight: 500;
-  padding-left: 20px;
-  padding-right: 20px;
 }

@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <img src="../../../../assets/images/logo-graficag.png" alt="" class="center">
+
+
+
+
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="container">
+          <div class="row">
+            <img src="" alt="" class="logo">
+          </div>
+          <div class="row">
+            <div class="col-6 offset-3">
+              <div class="mb-3">
+                <label for="floatingInput">Correo</label> <br>
+                <input class="input-login" id="floatingInput" placeholder="Escribe tu correo" type="text" name="identity"
+                  formControlName="identity" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 offset-3">
+              <div class="mb-3">
+                <label for="floatingInput">Contraseña</label> <br>
+                <input class="input-login" id="floatingInput" placeholder="Ingresa tu contraseña" type="text" name="password"
+                  formControlName="password" />
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <button class="btn-login" type="submit">Ingresar</button>
+              <br>
+              <br>
+              <button class="btn-forgot" href=""> Olvidaste tu Contraseña?</button>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        
+
+        </div>
+        
+      
+      </form>
+
+
+
+
+
+    </div>
+    <div class="col-8"
+      style="background-image: url(../../../../assets/images/login-background-1.jpg);background-size: cover; height: 100vh; overflow: auto;">
+
+    </div>
+  </div>
+</div>

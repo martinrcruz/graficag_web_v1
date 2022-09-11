@@ -1,7 +1,6 @@
-<div id="pdfTable">
 
-
-
+<mat-dialog-content>
+<div id="pdfTable" #pdfTable>
   <div class="row" style="padding: 0px; margin: 0px;">
     <h2 style="padding: 5px; margin: 10px 0px 10px 0px; background-color: rgb(197, 197, 197); font-size: 16px;">
       RESULTADOS DE BUSQUEDA</h2>
@@ -98,3 +97,18 @@
     </div>
   </div>
 </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-danger" style="margin-right: 15px; margin-top: 15px;" mat-button mat-dialog-close>Cerrar</button>
+      </div>
+      <div class="col-2 offset-8">
+        <button class="btn btn-add" (click)="downloadAsPDF()">
+          Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-actions>

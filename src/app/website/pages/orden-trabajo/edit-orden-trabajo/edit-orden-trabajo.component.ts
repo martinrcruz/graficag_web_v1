@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { FormaPagoService } from 'src/app/services/forma-pago.service';
 import { OrdenTrabajoService } from 'src/app/services/orden-trabajo.service';
+import { PagoService } from 'src/app/services/pago.service';
 import { TiempoEntregaService } from 'src/app/services/tiempo-entrega.service';
 import { TipoImpuestoService } from 'src/app/services/tipo-impuesto.service';
 import { TipoValorService } from 'src/app/services/tipo-valor.service';
@@ -16,6 +17,8 @@ import Swal from 'sweetalert2';
 import { SelectClienteComponent } from '../../cotizacion/select-cliente/select-cliente.component';
 import { AddDetalleOrdenTrabajoComponent } from '../modal/add-detalle-orden-trabajo/add-detalle-orden-trabajo.component';
 import { EditDetalleOrdenTrabajoComponent } from '../modal/edit-detalle-orden-trabajo/edit-detalle-orden-trabajo.component';
+import { OrdenTrabajoPdfComponent } from '../orden-trabajo-pdf/orden-trabajo-pdf.component';
+import { PagoOrdenTrabajoComponent } from '../pago-orden-trabajo/pago-orden-trabajo.component';
 
 @Component({
   selector: 'app-edit-orden-trabajo',
@@ -32,6 +35,7 @@ export class EditOrdenTrabajoComponent implements OnInit {
     private tiempoEntregaService: TiempoEntregaService,
     private ordenTrabajoService: OrdenTrabajoService,
     private tipoValorService: TipoValorService,
+    private pagoService: PagoService,
     private dialog: MatDialog,
     private router: Router,
     private activatedRouter: ActivatedRoute
@@ -44,8 +48,9 @@ export class EditOrdenTrabajoComponent implements OnInit {
   displayedColumns: string[] = ['editar', 'id_producto', 'producto', 'descripcion', 'cantidad', 'ancho', 'alto', 'area', 'terminaciones', 'tipo_valor', 'valor_m2', 'valor_unidad', 'valor_adicional', 'valor_total', 'eliminar'];
   dataSource: any
 
-  displayedColumnsCliente: string[] = ['id_cliente', 'nombre', 'correo', 'celular', 'rut_empresa', 'nombre_empresa', 'seleccionar'];
-  dataSourceCliente: any
+
+  displayedColumnsPago: string[] = ['tipo_pago', 'monto', 'fecha_pago', 'banco_origen', 'nro_orden', 'fecha_cobro', 'nro_cheque', 'nombre_titular', 'tipo_tarjeta', 'nro_operacion', 'codigo_autorizacion', 'otros', 'trabajador', 'fecha', 'eliminar',];
+  dataSourcePago: any
 
   isClienteSelected: any = false
   saveResponse: any
@@ -65,6 +70,12 @@ export class EditOrdenTrabajoComponent implements OnInit {
   observacion: any
   nombreTipoValor: any
   editData: any
+
+  valor_neto: any
+  valor_iva: any
+  valor_total: any
+  valor_deuda: any
+  valor_abono: any
 
   ultimaCotizacionFecha: any
   ultimaCotizacionHora: any
@@ -133,6 +144,8 @@ export class EditOrdenTrabajoComponent implements OnInit {
         this.loadData(this.orden_trabajo.id)
         console.log(this.orden_trabajo.id)
       })
+
+
   }
 
 
@@ -249,7 +262,7 @@ export class EditOrdenTrabajoComponent implements OnInit {
           this.onChangeMetodoPago(null, this.editData.data[0].id_forma_pago)
           this.onChangeTiempoEntrega(null, this.editData.data[0].id_tiempo_entrega)
           this.tipo_impuesto = this.editData.data[0].id_tipo_impuesto
-          this.tipoImpuesto = this.editData.data[0].nombre_tipo_impuesto
+          this.tipoImpuesto = this.editData.data[0].tipo_impuesto
           this.observacion = this.editData.data[0].observacion
           this.getCalculosDetalleOrdenTrabajo();
 
@@ -544,6 +557,59 @@ export class EditOrdenTrabajoComponent implements OnInit {
   }
 
 
+
+
+  deletePago(id_pago: any) {
+    var formData: any = new FormData();
+    formData.append("id_pago", id_pago);
+
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: 'Deseas eliminar el pago?',
+      icon: 'error',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.pagoService.deletePago(formData)
+          .subscribe({
+            next: (res) => {
+              Swal.fire('Eliminado con exito!', '', 'success')
+              this.getPagos(this.orden_trabajo.id)
+              // this.router.navigateByUrl("/orden-trabajo")
+            },
+            error: (err) => {
+              console.log(err)
+              alert('Error deleting')
+            }
+          })
+      } else if (result.isDenied || result.isDismissed) {
+        Swal.fire('El pago no fue eliminada.', '', 'info')
+
+      }
+    })
+  }
+
+
+  setTipoPago(tipo_pago: any) {
+    if (tipo_pago == "Tarjeta de Debito" || tipo_pago == "Tarjeta de Credito") {
+      return "Tarjeta"
+    } else {
+      return tipo_pago
+    }
+  }
+
+  setTipoTarjeta(tipo_tarjeta: any) {
+    if (tipo_tarjeta == "Tarjeta de Debito") {
+      return "Debito"
+    } else if (tipo_tarjeta == "Tarjeta de Credito") {
+      return "Credito"
+    } else {
+      return ""
+    }
+  }
+
   valorSumaNeto: number = 0;
   valorSumaIVA: number = 0;
   valorSumaTotal: number = 0;
@@ -622,16 +688,88 @@ export class EditOrdenTrabajoComponent implements OnInit {
               break;
 
           }
+          this.getPagos(this.orden_trabajo.id)
+
         },
         error: (err) => {
           alert('Error fetching')
         }
       })
 
+  }
+
+
+  getPagos(id_orden_trabajo: any) {
+    let formData: any = new FormData()
+    formData.append("id_orden_trabajo", id_orden_trabajo)
+
+    this.pagoService.getPagoByOrdenTrabajoId(formData)
+      .subscribe({
+        next: (res) => {
+          console.log(res)
+          var newData = Object.entries(res)
+          const datos = (newData[0][1])
+          this.dataSourcePago = new MatTableDataSource(datos);
+
+          var abono = 0;
+          for (let i = 0; i < datos.length; i++) {
+            const montoPago = Number(datos[i].monto);
+            abono = abono + montoPago
+          }
+
+          this.valor_total = this.valorSumaTotal
+          this.valor_abono = abono
+          this.valor_deuda = Math.abs(this.valor_abono - this.valorSumaTotal)
+
+
+        },
+        error: (err) => {
+
+        }
+      })
+  }
+
+
+  openPago() {
+    const dialogRef = this.dialog.open(PagoOrdenTrabajoComponent, {
+      width: "900px",
+      data: {
+        id_orden_trabajo: this.orden_trabajo.id
+      }
+    })
+
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+        this.getPagos(this.orden_trabajo.id)
+
+      }
+    })
 
   }
 
   openPdf() {
+    const dialogRef = this.dialog.open(OrdenTrabajoPdfComponent, {
+      data: {
+        id_orden_trabajo: this.orden_trabajo.id,
+        nombre_cliente: this.cliente.nombre_cliente,
+        correo_cliente: this.cliente.correo,
+        celular_cliente: this.cliente.celular,
+        nombre_empresa: this.cliente.nombre_empresa,
+        rut_empresa: this.cliente.rut_empresa,
+        direccion_empresa: this.cliente.direccion_empresa,
+        dataSource: this.dataSource,
+        tipo_impuesto: this.tipoImpuesto,
+        formaPago: this.formaPago,
+        tiempoEntrega: this.tiempoEntrega,
+        descuento: this.descuento,
+        valorSumaNeto: this.valorSumaNeto,
+        valorSumaIVA: this.valorSumaIVA,
+        valorSumaTotal: this.valorSumaTotal,
+        observacion: this.orden_trabajoForm.get("observacion")?.value,
+        descripcionFormaPago: this.descripcionFormaPago,
+        descripcionTiempoEntrega: this.descripcionTiempoEntrega
+      }
+    })
   }
 
 
