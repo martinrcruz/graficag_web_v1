@@ -30,7 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import {MatMenuModule} from '@angular/material/menu'; 
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -75,6 +75,9 @@ import { TablaOtPdfComponent } from './website/pages/orden-trabajo/tabla-ot-pdf/
 import { PagoCotizacionComponent } from './website/pages/cotizacion/pago-cotizacion/pago-cotizacion.component';
 import { PagoOrdenTrabajoComponent } from './website/pages/orden-trabajo/pago-orden-trabajo/pago-orden-trabajo.component';
 import { LoginComponent } from './website/auth/login/login.component';
+import { SelectEstadoProductoComponent } from './website/pages/reporte/select-estado-producto/select-estado-producto.component';
+import { PerfilComponent } from './website/pages/user/perfil/perfil.component';
+import { AjustesComponent } from './website/pages/user/ajustes/ajustes.component';
 
 
 
@@ -139,6 +142,9 @@ import { LoginComponent } from './website/auth/login/login.component';
     PagoCotizacionComponent,
     PagoOrdenTrabajoComponent,
     LoginComponent,
+    SelectEstadoProductoComponent,
+    PerfilComponent,
+    AjustesComponent,
   ],
   imports: [
     BrowserModule,
@@ -156,7 +162,8 @@ import { LoginComponent } from './website/auth/login/login.component';
     HttpClientModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} }

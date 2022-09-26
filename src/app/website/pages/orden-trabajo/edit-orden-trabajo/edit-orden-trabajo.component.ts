@@ -248,6 +248,7 @@ export class EditOrdenTrabajoComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.editData = res;
+          console.log(this.editData)
           console.log(this.editData.data[0]);
           this.orden_trabajoForm.setValue({
             id_orden_trabajo: this.editData.data[0].id_orden_trabajo,
@@ -478,7 +479,8 @@ export class EditOrdenTrabajoComponent implements OnInit {
         next: (res) => {
           var newData = Object.entries(res)
           const formaPagoData = (newData[0][1][0])
-          this.descripcionFormaPago = formaPagoData.descripcion
+          console.log(newData)
+          this.descripcionFormaPago = formaPagoData.descripcion_forma_pago
           this.formaPago = formaPagoData.nombre
 
 

@@ -19,6 +19,8 @@ import { ProveedorComponent } from './website/pages/proveedor/proveedor.componen
 import { ReporteComponent } from './website/pages/reporte/reporte.component';
 import { TerminacionComponent } from './website/pages/terminacion/terminacion.component';
 import { TipoValorComponent } from './website/pages/tipo-valor/tipo-valor.component';
+import { AjustesComponent } from './website/pages/user/ajustes/ajustes.component';
+import { PerfilComponent } from './website/pages/user/perfil/perfil.component';
 import { UsuariosComponent } from './website/pages/usuarios/usuarios.component';
 
 const routes: Routes = [
@@ -126,6 +128,16 @@ const routes: Routes = [
         path: 'usuarios',
         canActivate: [AuthGuard],
         component: UsuariosComponent
+      },
+      {
+        path: 'perfil',
+        canActivate: [AuthGuard],
+        component: PerfilComponent
+      },
+      {
+        path: 'ajustes',
+        canActivate: [AuthGuard],
+        component: AjustesComponent
       },
 
     ]

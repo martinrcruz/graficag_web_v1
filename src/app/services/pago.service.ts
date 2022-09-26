@@ -33,6 +33,10 @@ export class PagoService {
     return this.http.post(`${this.apiUrl}${this.controllerUrl}/getPagoByOrdenTrabajoId`, formData);
   }
 
+  getPagoReporte(formData: any) {
+    return this.http.post(`${this.apiUrl}${this.controllerUrl}/getPagoReporte`, formData);
+  }
+
   addPago(pagoData: any) {
     return this.http.post(`${this.apiUrl}${this.controllerUrl}/insertPago`, pagoData);
   }

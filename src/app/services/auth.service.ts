@@ -44,8 +44,7 @@ export class AuthService {
   }
   
   getUserData() {
-
-    this.http.get(`${this.apiUrl}${this.controllerUrl}/get_user_data`, { withCredentials: true })
+    return this.http.get(`${this.apiUrl}${this.controllerUrl}/get_user_data`, { withCredentials: true })
       // .pipe(
       //   tap((user) => this.logged_user.next(user))
       // )

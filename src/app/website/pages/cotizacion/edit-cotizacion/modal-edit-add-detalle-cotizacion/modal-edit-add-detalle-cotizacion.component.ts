@@ -62,7 +62,7 @@ export class ModalEditAddDetalleCotizacionComponent implements OnInit {
   descripcionProducto: any
 
   imagen: any
-  ruta: string = "http://localhost/graficag_v1/graficag_sistema/"
+  ruta: string = "http://localhost:8089/graficag_v1/graficag_sistema/"
 
   //validacion formulario
   primeraParte: boolean = false;

@@ -1,0 +1,29 @@
+.header-row {
+  background-color: grey;
+  color:white;
+  padding: 10px 0px 10px 0px;
+  font-weight: 550;
+}
+
+.content-row {
+  color:black;
+  padding: 10px 0px 10px 0px;
+  font-weight: 550;
+}
+
+
+
+.border-right {
+ border-right: 2px solid white;
+}
+
+hr{ //horizontal hr
+  border:         none;
+  border-left:    2px solid black;
+  height:         3vh;
+  width:          1px;       
+}
+
+.content {
+  background-color: white !important;
+}

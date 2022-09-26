@@ -52,7 +52,7 @@ export class EditDetalleOrdenTrabajoComponent implements OnInit {
   calculoTotalVisual: any
 
   imagen: any
-  ruta: string = "http://localhost/graficag_v1/graficag_sistema/"
+  ruta: string = "http://localhost:8089/graficag_v1/graficag_sistema/"
 
 
   //validacion formulario

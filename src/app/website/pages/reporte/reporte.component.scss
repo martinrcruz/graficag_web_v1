@@ -1,0 +1,183 @@
+.bread-crumb {
+  background-color: rgb(238, 238, 238);
+  padding: 15px 15px 15px 35px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.contenedor-tabla {
+  background-color: #ffffff;
+}
+
+.header {
+  padding: 30px 0px 0px 30px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+td,
+th {
+  border: 1px solid #f3f3f3;
+  text-align: center;
+}
+
+th {
+  background-color: #444759 !important;
+  color: white;
+  text-align: center !important;
+  padding-left: 10px !important;
+}
+
+.mat-sort-header-arrow .mat-sort-header-indicator .mat-sort-header-pointer-left .mat-sort-header-pointer-right .mat-sort-header-pointer-middle {
+  color: white !important;
+  opacity: 1;
+
+}
+
+.mat-sort-header-arrow .ng-trigger .ng-trigger-arrowPosition .ng-tns-c244-4 .ng-star-inserted {
+  color: white !important;
+  opacity: 1;
+
+}
+
+.edit-estado-producto {
+  background-color: rgb(13, 110, 253);
+  display: inline;
+  // padding: 11px 12px 11px 12px;
+  border-radius: 20% 0% 0% 20%;
+  padding: 26px 25px 6px 15px;
+
+}
+
+.edit-estado-servicio {
+  background-color: #8841b1bb;
+  display: inline;
+  padding: 10px 12px 10px 12px;
+  color: white;
+  border-radius: 20%;
+  border: none !important;
+}
+
+.select-estado-servicio {
+  padding: 0px 40px 50px 40px;
+  border-bottom: 1px solid grey;
+
+}
+
+.estado-producto {
+  border: 1px solid black;
+  padding: 25px 5px 5px 5px;
+  margin-left: 0px;
+  border-radius: 0px 5px 5px 0px;
+  display: inline;
+}
+
+::ng-deep.mat-menu-content:not(:empty) {
+  padding: 0px !important;
+
+}
+
+.mat-column-id_orden_trabajo {
+  width: 2% !important;
+}
+
+.mat-column-id_detalle_orden_trabajo {
+  width: 2% !important;
+}
+
+.mat-column-detalle_orden_trabajo {
+  width: 4% !important;
+}
+
+.mat-column-tiempo_entrega {
+  width: 2% !important;
+}
+
+.mat-column-fecha_pago_orden_trabajo {
+  width: 3% !important;
+}
+
+.mat-column-cliente {
+  width: 8% !important;
+}
+
+.mat-column-correo_cliente {
+  width: 3% !important;
+}
+
+.mat-column-id_producto {
+  width: 2% !important;
+}
+
+.mat-column-id_categoria {
+  width: 2% !important;
+}
+
+.mat-column-nombre_producto {
+  width: 3% !important;
+}
+
+.mat-column-descripcion_producto {
+  width: 10% !important;
+}
+
+.mat-column-ancho {
+  width: 2% !important;
+}
+
+.mat-column-alto {
+  width: 2% !important;
+}
+
+.mat-column-area {
+  width: 2% !important;
+}
+
+.mat-column-cantidad {
+  width: 2% !important;
+}
+
+.mat-column-terminaciones {
+  width: 3% !important;
+}
+
+.mat-column-vendedor {
+  width: 3% !important;
+}
+
+.mat-column-instalacion {
+  width: 3% !important;
+}
+
+.mat-column-estado_servicio {
+  width: 2% !important;
+}
+
+.mat-column-estado_producto {
+  width: 3% !important;
+}
+
+.deuda {
+  padding:0px;
+  padding-left: 12px;
+  margin: 0px;
+}
+.estado-servicio {
+  padding:0px;
+  padding-top: 3px;
+  padding-right: 12px;
+  margin: 0px;
+}

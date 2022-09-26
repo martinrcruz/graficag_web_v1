@@ -1,0 +1,405 @@
+<div class="row mb-4 pt-3" style="background-color: #444759 !important;">
+  <div class="col-12">
+    <h2 style="font-size: 25px; color:white;">Detalle de Orden de Trabajo</h2>
+  </div>
+
+</div>
+
+
+<mat-dialog-content>
+  <div class="container">
+    <div class="row header-row">
+      <!-- ID OT-->
+      <div class="col-1">
+        <div class="header border-right">
+          ID OT
+        </div>
+      </div>
+
+      <!-- DETALLE OT-->
+      <div class="col-1">
+        <div class="header border-right">
+          DET. OT
+        </div>
+      </div>
+
+
+      <!-- TIEMPO ENTREGA-->
+      <div class="col-2">
+        <div class="header border-right">
+          TIEMPO DE ENTREGA
+        </div>
+      </div>
+
+
+      <!-- FECHA PAGO OT-->
+      <div class="col-2">
+        <div class="header border-right">
+          FECHA PAGO
+        </div>
+      </div>
+
+
+      <!-- ID CLIENTE -->
+      <div class="col-1">
+        <div class="header border-right">
+          ID CLIENTE
+        </div>
+      </div>
+
+
+      <!-- NOMBRE CLIENTE-->
+      <div class="col-3">
+        <div class="header border-right">
+          NOMBRE CLIENTE
+        </div>
+      </div>
+
+
+      <!-- EMAIL CLIENTE-->
+      <div class="col-2">
+        <div class="header">
+          EMAIL CLIENTE
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="row content-row">
+      <!-- ID OT-->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.id_detalle_ot}}
+
+        </div>
+      </div>
+
+      <!-- DETALLE OT-->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.detalle_ot}}
+
+        </div>
+      </div>
+
+
+      <!-- TIEMPO ENTREGA-->
+      <div class="col-2">
+        <div class="content">
+          {{this.orden_trabajo.tiempo_entrega}}
+
+        </div>
+      </div>
+
+
+      <!-- FECHA PAGO OT-->
+      <div class="col-2">
+        <div class="content">
+          {{this.orden_trabajo.fecha_pago}}
+
+        </div>
+      </div>
+
+
+      <!-- ID CLIENTE -->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.id_cliente}}
+        </div>
+      </div>
+
+
+      <!-- NOMBRE CLIENTE-->
+      <div class="col-3">
+        <div class="content">
+          {{this.orden_trabajo.nombre_cliente}}
+        </div>
+      </div>
+
+
+      <!-- EMAIL CLIENTE-->
+      <div class="col-2">
+        <div class="content">
+          {{this.orden_trabajo.email_cliente}}
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row header-row">
+
+      <!-- ID PRO-->
+      <div class="col-1">
+        <div class="header border-right">
+          ID PRO
+        </div>
+      </div>
+      <!-- ID CAT-->
+      <div class="col-1">
+        <div class="header border-right">
+          ID CAT
+        </div>
+      </div>
+      <!-- NOMBRE PRODUCTO-->
+      <div class="col-3">
+        <div class="header border-right">
+          NOMBRE PRODUCTO
+        </div>
+      </div>
+      <!-- DESCRIPCION PRODUCTO -->
+      <div class="col-3">
+        <div class="header border-right">
+          DESCRIPCION PRODUCTO
+        </div>
+      </div>
+      <!-- ANCHO -->
+      <div class="col-1">
+        <div class="header border-right">
+          ANCHO
+        </div>
+      </div>
+      <!-- ALTO -->
+      <div class="col-1">
+        <div class="header border-right">
+          ALTO
+        </div>
+      </div>
+      <!-- CANTIDAD -->
+      <div class="col-1">
+        <div class="header border-right">
+          CANTIDAD
+        </div>
+      </div>
+      <!-- AREA -->
+      <div class="col-1">
+        <div class="header">
+          AREA
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row content-row">
+
+      <!-- ID PRO-->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.id_producto}}
+        </div>
+      </div>
+      <!-- ID CAT-->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.id_categoria}}
+        </div>
+      </div>
+      <!-- NOMBRE PRODUCTO-->
+      <div class="col-3">
+        <div class="content">
+          {{this.orden_trabajo.nombre_producto}}
+        </div>
+      </div>
+      <!-- DESCRIPCION PRODUCTO -->
+      <div class="col-3">
+        <div class="content">
+          {{this.orden_trabajo.descripcion_producto}}
+        </div>
+      </div>
+      <!-- ANCHO -->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.ancho}}
+        </div>
+      </div>
+      <!-- ALTO -->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.alto}}
+        </div>
+      </div>
+      <!-- CANTIDAD -->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.cantidad}}
+        </div>
+      </div>
+      <!-- AREA -->
+      <div class="col-1">
+        <div class="content">
+          {{this.orden_trabajo.area}}
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row header-row">
+      <!-- TERMINACIONES -->
+      <div class="col-7">
+        <div class="header border-right">
+          TERMINACIONES
+        </div>
+      </div>
+      <!-- VENDEDOR -->
+      <div class="col-2">
+        <div class="header border-right">
+          VENDEDOR
+        </div>
+      </div>
+      <!-- INSTALACION -->
+      <div class="col-3">
+        <div class="header">
+          INSTALACION
+        </div>
+      </div>
+    </div>
+
+    <div class="row content-row">
+      <!-- TERMINACIONES -->
+      <div class="col-7">
+        <div class="content">
+          {{this.orden_trabajo.terminaciones}}
+        </div>
+      </div>
+      <!-- VENDEDOR -->
+      <div class="col-2">
+        <div class="content">
+          {{this.orden_trabajo.vendedor}}
+        </div>
+      </div>
+      <!-- INSTALACION -->
+      <div class="col-3">
+        <div class="content">
+          {{this.orden_trabajo.instalacion}}
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row header-row">
+      <!-- ESTADO -->
+      <div class="col-12">
+        <div class="header">
+          ESTADO
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row content-row">
+      <div class="col-12">
+
+        <div class="content">
+          <form [formGroup]="estadosForm">
+
+            <!-- ESTADOS DE PRODUCTO -->
+            <div class="container-fluid">
+              <div class="row">
+
+
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <mat-label>Cliente envia propuesta</mat-label>
+                  <mat-form-field appearance="fill">
+                    <mat-select formControlName="cliente_envia" name="cliente_envia" id="cliente_envia"
+                      (selectionChange)="changeEnvia($event)">
+                      <mat-option value="SI"> SI </mat-option>
+                      <mat-option value="NO"> NO </mat-option>
+                      <mat-option value="PENDIENTE"> PENDIENTE </mat-option>
+                      <mat-option value="BOSQUEJO"> BOSQUEJO </mat-option>
+                      <mat-option value="SOLO IDEAS"> SOLO IDEAS </mat-option>
+                      <mat-option value="NULO"> NULO </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p style="text-align: center;">{{this.orden_trabajo.trabajador_1}}</p>
+                </div>
+
+                <div class="col-2">
+                  <mat-label>Hacemos propuesta</mat-label>
+                  <mat-form-field appearance="fill">
+                    <mat-select formControlName="propuesta" name="propuesta" id="propuesta"
+                      (selectionChange)="changePropuesta($event)">
+                      <mat-option value="SI DESDE CERO"> SI DESDE CERO </mat-option>
+                      <mat-option value="SI MODIFICADO"> SI MODIFICADO </mat-option>
+                      <mat-option value="NO"> NO </mat-option>
+                      <mat-option value="NULO"> NULO </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p style="text-align: center;">{{this.orden_trabajo.trabajador_2}}</p>
+                </div>
+
+                <div class="col-2">
+                  <mat-label>Cliente aprueba propuesta</mat-label>
+                  <mat-form-field appearance="fill">
+                    <mat-select formControlName="cliente_aprueba" name="cliente_aprueba" id="cliente_aprueba"
+                      (selectionChange)="changeAprueba($event)">
+                      <mat-option value="SI"> SI </mat-option>
+                      <mat-option value="NO"> NO </mat-option>
+                      <mat-option value="PENDIENTE"> PENDIENTE </mat-option>
+                      <mat-option value="NULO"> NULO </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p style="text-align: center;">{{this.orden_trabajo.trabajador_3}}</p>
+                </div>
+
+                <div class="col-2">
+                  <mat-label>Donde se realiza</mat-label>
+                  <mat-form-field appearance="fill">
+                    <mat-select formControlName="realiza" name="realiza" id="realiza"
+                      (selectionChange)="changeRealiza($event)">
+                      <mat-option value="GRAFICAG"> GRAFICAG </mat-option>
+                      <mat-option value="SANTIAGO"> SANTIAGO </mat-option>
+                      <mat-option value="OTROS"> OTROS </mat-option>
+                      <mat-option value="NULO"> NULO </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p style="text-align: center;">{{this.orden_trabajo.trabajador_4}}</p>
+                </div>
+
+                <div class="col-2">
+                  <mat-label>Algun problema</mat-label>
+                  <mat-form-field appearance="fill">
+                    <mat-select formControlName="problema" name="problema" id="problema"
+                      (selectionChange)="changeProblema($event)">
+                      <mat-option value="SI"> SI </mat-option>
+                      <mat-option value="NO"> NO </mat-option>
+                      <mat-option value="NULO"> NULO </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p style="text-align: center;">{{this.orden_trabajo.trabajador_5}}</p>
+                </div>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+</mat-dialog-content>
+
+
+
+
+<mat-dialog-actions>
+  <div class="col-4">
+    <button class="btn btn-danger" style="margin-right: 15px;" mat-button mat-dialog-close>CANCELAR</button>
+    <button type="submit" class="btn btn-primary" mat-dialog-close>ACEPTAR</button>
+  </div>
+</mat-dialog-actions>

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row header-profile">
+    <div class="col-3">
+      <img src="../../../../../assets/images/user.png" width="200px" class="profile-image">
+    </div>
+
+    <div class="col-6 user-presentation">
+      <h1> {{ this.usuario.full_nombre }} </h1>
+      <h2> {{ this.usuario.perfil.cargo }} </h2>
+    </div>
+
+  </div>
+  <div class="row body-profile">
+
+
+
+    <div class="col-6 offset-3  info-profile">
+
+      <h1>AJUSTES DE CUENTA</h1>
+      <hr>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-4 user-data">
+            <h4 class="info-data">Nombre de usuario : </h4>
+            <h4>Correo electronico : </h4>
+            <h4>Nro de contacto : </h4>
+          </div>
+
+          <div class="col-8">
+            <form [formGroup]="userDataForm" (ngSubmit)="editUserData()">
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="nombre_usuario">
+              </mat-form-field>
+
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="correo_electronico">
+              </mat-form-field>
+
+              <mat-form-field class="full-width" appearance="fill">
+                <input matInput formControlName="nro_contacto">
+              </mat-form-field>
+
+              <button class="btn btn-info" type="submit"> Aplicar Cambios </button>
+
+            </form>
+
+            <button type="button" class="btn btn-warning">Cambiar Contraseña</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row footer-profile">
+    <div class="col-12"></div>
+  </div>
+</div>

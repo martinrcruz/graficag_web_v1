@@ -30,7 +30,7 @@ export class OrdenTrabajoPdfComponent implements OnInit {
   observacion: any
   descripcionFormaPago: any
   descripcionTiempoEntrega: any
-  ruta: string = "http://localhost/graficag_v1/graficag_sistema/"
+  ruta: string = "http://localhost:8089/graficag_v1/graficag_sistema/"
 
 
   constructor(

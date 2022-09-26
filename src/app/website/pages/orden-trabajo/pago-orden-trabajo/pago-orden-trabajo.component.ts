@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { OrdenTrabajoService } from 'src/app/services/orden-trabajo.service';
 import { PagoService } from 'src/app/services/pago.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pago-orden-trabajo',
@@ -73,6 +74,7 @@ export class PagoOrdenTrabajoComponent implements OnInit {
     tipo_tarjeta: new FormControl('', Validators.required),
     nro_operacion: new FormControl('', Validators.required),
     codigo_autorizacion: new FormControl('', Validators.required),
+    banco_origen: new FormControl('', Validators.required)
 
   })
 
@@ -174,9 +176,10 @@ export class PagoOrdenTrabajoComponent implements OnInit {
             const montoPago = Number(datos[i].monto);
             abono = abono + montoPago
           }
-        
+
           this.valor_deuda = Number(this.valor_total) - abono
 
+          // this.valor_deuda = 0;
         },
         error: (err) => {
 
@@ -186,7 +189,18 @@ export class PagoOrdenTrabajoComponent implements OnInit {
   }
 
   generatePago(tipo: string) {
+
     moment.locale("es");
+
+    if (this.efectivoForm.get("monto")?.value > this.valor_deuda) {
+      Swal.fire({
+        title: 'Operacion no valida',
+        text: 'El valor a pagar supera el monto adeudado, ingresa un monto valido igual o menor a la deuda pendiente.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+      return;
+    }
 
     switch (tipo) {
       case 'efectivo':
@@ -264,25 +278,76 @@ export class PagoOrdenTrabajoComponent implements OnInit {
 
       default:
         break;
-
     }
-
-
-
   }
 
-  addPago(form: any) {
 
+  /**
+   * @param {string}  operacion - Tipo de operacion ("create", "edit")
+   * @param {string} tipo - Tipo de resultado ("success", "error")
+   * @param {string} objeto - Nombre del objeto que esta en el contexto de la operacion. Ej: Pago
+   * @returns {Swal} Arroja una alerta de tipo Swal
+   */
+  showAlert(operacion: string, tipo: string, objeto: string) {
+
+    var createMsg = {}
+    var editMsg = {}
+
+    if (operacion == "create") {
+      switch (tipo) {
+        case "success":
+          createMsg = {
+            title: 'Creado con exito!',
+            text: objeto + ' ha sido creado con exito',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }
+          break;
+        case "error":
+          createMsg = {
+            title: 'Error al crear',
+            text: 'Hubo un error al crear ' + objeto,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          }
+          break;
+      }
+      Swal.fire(createMsg)
+    } else if (operacion == "edit") {
+      switch (tipo) {
+        case "success":
+          createMsg = {
+            title: 'Editado con exito!',
+            text: objeto + ' ha sido editado con exito',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }
+          break;
+        case "error":
+          createMsg = {
+            title: 'Error al editar',
+            text: 'Hubo un error al editar ' + objeto,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          }
+          break;
+      }
+    }
+  }
+
+
+
+  addPago(form: any) {
     form.append("id_orden_trabajo", this.id_orden_trabajo)
     form.append("id_trabajador", this.usuario.id)
     this.pagoService.addPago(form)
       .subscribe({
         next: (res) => {
-          alert("success")
-          this.dialogRef.close()
+          this.showAlert("create", "success", "Pago")
         },
         error: (err) => {
           alert("error")
+          this.showAlert("create", "error", "Pago")
         }
       })
 

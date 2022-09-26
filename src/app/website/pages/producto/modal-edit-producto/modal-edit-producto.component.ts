@@ -48,7 +48,7 @@ export class ModalEditProductoComponent implements OnInit {
   imgSrc: any
   imageSrc: any
   imagen: any
-  ruta: string = "http://localhost/graficag_v1/graficag_sistema/"
+  ruta: string = "http://localhost:8089/graficag_v1/graficag_sistema/"
 
   productoForm = new FormGroup({
     id_producto: new FormControl({ value: 'No aplica', disabled: true }),

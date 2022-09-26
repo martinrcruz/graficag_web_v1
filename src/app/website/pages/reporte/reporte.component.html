@@ -1,1 +1,290 @@
-<p>reporte works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bread-crumb">
+      <i style="display: inline;" class="fa-solid fa-clipboard-list fa-2xl"></i>
+      <h1 style="display: inline; font-size: 30px;"> REPORTE </h1>
+      <h4 style="display: inline; font-size: 20px;">Panel de Reportes</h4>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid contenedor-tabla">
+
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-1 offset-5 pt-4">
+      <div class="pdf-button" style="padding-left: 60px;">
+        <i class="fa-sharp fa-solid fa-print fa-2xl" (click)="tablaPdf()"></i>
+      </div>
+    </div>
+    <div class="col-3">
+      <mat-form-field appearance="standard">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id_orden_trabajo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> <strong
+            style="font-size: 13px;">{{element.id_orden_trabajo}} </strong> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id_detalle_orden_trabajo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID DET.</th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> <strong
+            style="font-size: 13px;">{{element.id_detalle_orden_trabajo}} </strong> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="detalle_orden_trabajo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DET. OT </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;">
+
+          <div class="containe-fluid">
+            <div class="row">
+              <div class="col-6 deuda">
+                <div *ngIf="!element.pendiente">
+                  <i class="fa-solid fa-dollar-sign fa-lg"
+                    style="color:rgb(255, 255, 255) !important; background-color: green; padding: 12px 8px 12px 8px; border-radius: 50%;"></i>
+                </div>
+                <div *ngIf="element.pendiente">
+                  <i class="fa-solid fa-dollar-sign fa-lg"
+                    style="color:rgb(255, 255, 255) !important; background-color: red; padding: 12px 8px 12px 8px;border-radius: 50%;"></i>
+                </div>
+              </div>
+
+              <div class="col-6 estado-servicio">
+                <i *ngIf="element.estado_servicio == 1" class="fa-sharp fa-solid fa-circle-xmark fa-2xl"
+                  style="padding-right: 10px; color:rgb(184, 0, 0)"></i>
+                <i *ngIf="element.estado_servicio == 2" class="fa-solid fa-circle-minus fa-2xl"
+                  style="padding-right: 10px; color:rgb(117, 0, 184)"></i>
+                <i *ngIf="element.estado_servicio == 3" class="fa-solid fa-circle-check fa-2xl"
+                  style="padding-right: 10px; color:rgb(0, 141, 184)"></i>
+                <i *ngIf="element.estado_servicio == 4" class="fa-solid fa-circle-check fa-2xl"
+                  style="padding-right: 10px; color:rgb(0, 184, 71)"></i>
+              </div>
+            </div>
+          </div>
+
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tiempo_entrega">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> TIEMPO ENTREGA</th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.tiempo_entrega}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha_pago_orden_trabajo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA PAGO OT </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.fecha_pago_orden_trabajo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID - NOMBRE CLIENTE </th>
+        <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 13px;">
+          <strong style="font-size: 13px;">{{element.id_cliente}}</strong> - {{element.nombre_cliente}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="correo_cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CORREO CLIENTE </th>
+        <td mat-cell *matCellDef="let element" style="text-align: left; padding-left: 10px; font-size: 13px;">
+          <strong style="font-size: 13px;">{{element.correo_cliente}}</strong>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id_producto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID PRO.</th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.id_producto}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id_categoria">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID CAT.</th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.id_categoria}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre_producto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE PRODUCTO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.nombre_producto}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion_producto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPCION PRODUCTO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; text-align: start; padding-left: 10px;">
+          {{element.descripcion_producto}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ancho">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ANCHO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.ancho}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="alto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ALTO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.alto}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="area">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> AREA </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.area}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CANT. </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{element.cantidad}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="terminaciones">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> TERMINACIONES </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; text-align: start; padding-left: 10px;">
+          {{element.terminaciones}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="vendedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> VENDEDOR </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;"> {{ element.vendedor }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="instalacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> INSTALACION </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; text-align: start; padding-left: 10px;"> {{
+          element.instalacion }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado_servicio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO SERVICIO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px;">
+
+          <button mat-button [matMenuTriggerFor]="beforeMenu" class="edit-estado-servicio"><i
+              class="fa-solid fa-pen-to-square"></i></button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item class="select-estado-servicio"
+              (click)="selectEstadoServicio(element.id_detalle_orden_trabajo, 1)"> <i
+                class="fa-sharp fa-solid fa-circle-xmark fa-2xl" style="padding-right: 10px; color:rgb(184, 0, 0)"></i>
+              En Espera</button>
+            <button mat-menu-item class="select-estado-servicio"
+              (click)="selectEstadoServicio(element.id_detalle_orden_trabajo, 2)"> <i
+                class="fa-solid fa-circle-minus fa-2xl" style="padding-right: 10px; color:rgb(117, 0, 184)"></i> En
+              Proceso</button>
+            <button mat-menu-item class="select-estado-servicio"
+              (click)="selectEstadoServicio(element.id_detalle_orden_trabajo, 3)"> <i
+                class="fa-solid fa-circle-check fa-2xl" style="padding-right: 10px; color:rgb(0, 141, 184)"></i> Para
+              Entrega</button>
+            <button mat-menu-item class="select-estado-servicio"
+              (click)="selectEstadoServicio(element.id_detalle_orden_trabajo, 4)"> <i
+                class="fa-solid fa-circle-check fa-2xl" style="padding-right: 10px; color:rgb(0, 184, 71)"></i>
+              Entregado</button>
+          </mat-menu>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado_producto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10% !important;"> ESTADO PRODUCTO </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 13px; text-align: start; padding-left: 5px;">
+
+          <div class="edit-estado-producto" (click)="openEstado(element.id_detalle_orden_trabajo)"
+            style="cursor: pointer;">
+            <i class="fa-solid fa-pencil" style="color:white; position: absolute; padding-top: 23px;"></i>
+          </div>
+          <div class="estado-producto">
+
+
+
+
+            <div style="display: inline-block; padding-top: 12px;">
+              <i *ngIf="element.cliente_envia_1 && element.cliente_envia != 'NULO'"
+                class="fa-solid fa-circle fa-2xl"></i>
+              <p *ngIf="element.cliente_envia_1 && element.cliente_envia != 'NULO'" style="font-size: 8px;">
+                {{element.nombre_trabajador_1}}</p>
+            </div>
+            <div style="display: inline-block; padding-top: 12px;">
+              <i *ngIf="element.propuesta_2 && element.propuesta_2 != 'NULO'" class="fa-solid fa-circle fa-2xl"
+                style="color:grey"></i>
+              <p *ngIf="element.propuesta_2 && element.propuesta_2 != 'NULO'" style="font-size: 8px;">
+                {{element.nombre_trabajador_2}}</p>
+            </div>
+            <div style="display: inline-block; padding-top: 12px;">
+              <i *ngIf="element.cliente_aprueba_3 && element.cliente_aprueba_3 != 'NULO'"
+                class="fa-solid fa-circle fa-2xl" style="color:rgb(207, 207, 207)"></i>
+              <p *ngIf="element.cliente_aprueba_3 && element.cliente_aprueba_3 != 'NULO'" style="font-size: 8px;">
+                {{element.nombre_trabajador_3}}</p>
+
+            </div>
+            <div style="display: inline-block; padding-top: 12px;">
+              <i *ngIf="element.realiza_4 && element.realiza_4 != 'NULO'" class="fa-solid fa-circle fa-2xl"
+                style="color:rgb(255, 199, 199)"></i>
+              <p *ngIf="element.realiza_4 && element.realiza_4 != 'NULO'" style="font-size: 8px;">
+                {{element.nombre_trabajador_4}}</p>
+
+            </div>
+            <div style="display: inline-block; padding-top: 12px;">
+              <i *ngIf="element.problema_5 && element.problema_5 != 'NULO'" class="fa-solid fa-circle fa-2xl"
+                style="color:rgb(218, 126, 21)"></i>
+              <p *ngIf="element.problema_5 && element.problema_5 != 'NULO'" style="font-size: 8px;">
+                {{element.nombre_trabajador_5}}</p>
+            </div>
+
+
+
+
+            <div style="display: inline-block; padding-top: 12px; color:transparent;">
+              <i *ngIf="element.cliente_envia_1 == null|| element.cliente_envia_1 == 'NULO'"
+                class="fa-solid fa-circle fa-2xl"></i>
+              <p *ngIf="element.nombre_trabajador_1 == null|| element.nombre_trabajador_1 == 'NULO'" style="font-size: 8px;  color:transparent;">
+                NULL</p>
+            </div>
+
+            <div style="display: inline-block; padding-top: 12px; color:transparent;">
+              <i *ngIf="element.propuesta_2 == null|| element.propuesta_2 == 'NULO'"
+                class="fa-solid fa-circle fa-2xl"></i>
+              <p *ngIf="element.nombre_trabajador_2 == null|| element.nombre_trabajador_2 == 'NULO'" style="font-size: 8px;  color:transparent;">
+                NULL</p>
+            </div>
+
+            <div style="display: inline-block; padding-top: 12px; color:transparent;">
+              <i *ngIf="element.cliente_aprueba_3 == null|| element.cliente_aprueba_3 == 'NULO'"
+                class="fa-solid fa-circle fa-2xl"></i>
+              <p *ngIf="element.nombre_trabajador_3 == null|| element.nombre_trabajador_3 == 'NULO'" style="font-size: 8px;  color:transparent;">
+                NULL</p>
+            </div>
+
+            <div style="display: inline-block; padding-top: 12px; color:transparent;">
+              <i *ngIf="element.realiza_4 == null || element.realiza_4 == 'NULO'"
+                class="fa-solid fa-circle fa-2xl"></i>
+              <p *ngIf="element.nombre_trabajador_4 == null|| element.nombre_trabajador_4 == 'NULO'" style="font-size: 8px;  color:transparent;">
+                NULL</p>
+            </div>
+
+            <div style="display: inline-block; padding-top: 12px; color:transparent;">
+              <i *ngIf="element.problema_5 == null || element.problema_5 == 'NULO'"
+                class="fa-solid fa-circle fa-2xl"></i>
+              <p *ngIf="element.nombre_trabajador_5 == null || element.nombre_trabajador_5 == 'NULO'" style="font-size: 8px;  color:transparent;">
+                NULL</p>
+            </div>
+
+          </div>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+  <br>
+
+</div>

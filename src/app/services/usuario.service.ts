@@ -30,6 +30,14 @@ export class UsuarioService {
     return this.http.post(`${this.apiUrl}${this.controllerUrl}/insertUsuario`, usuarioData);
   }
 
+  createUser(usuarioData: any) {
+    return this.http.post(`${this.apiUrl}auth/create_user`, usuarioData);
+  }
+
+  createProfile(profileData: any) {
+    return this.http.post(`${this.apiUrl}${this.controllerUrl}/addProfile`, profileData);
+  }
+
   updateUsuario(usuarioData: any) {
     return this.http.post(`${this.apiUrl}${this.controllerUrl}/updateUsuario`, usuarioData);
   }

@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row header-profile">
+    <div class="col-3">
+      <img src="../../../../../assets/images/user.png" width="200px" class="profile-image">
+    </div>
+
+    <div class="col-6 user-presentation">
+      <h1> {{ this.usuario.full_nombre }} </h1>
+      <h2> {{ this.usuario.perfil.cargo }} </h2>
+    </div>
+
+  </div>
+  <div class="row body-profile">
+    <div class="col-3 description-profile">
+      <h3>Biografia</h3>
+      <p> {{ this.usuario.perfil.biografia}}</p>
+    </div>
+
+
+    <div class="col-4 info-profile">
+
+      <h1>INFORMACION PERSONAL</h1>
+      <hr>
+      <h4>Nombres: </h4> <p> {{ this.usuario.nombre }} </p> <br>
+      <h4>Apellidos: </h4> <p> {{ this.usuario.apellido }} </p><br>
+      <h4>Cargo: </h4> <p> {{ this.usuario.perfil.cargo }} </p> <br>
+      <h4>Rut: </h4> <p> {{ this.usuario.perfil.rut }} </p> <br>
+      <h4>Fecha Nacimiento: </h4> <p> {{ this.usuario.perfil.fecha_nacimiento }} </p> <br>
+      <h4>Fecha de Ingreso: </h4> <p> {{ this.usuario.perfil.fecha_ingreso }} </p> <br>
+
+    </div>
+
+
+    <div class="col-4 info-profile">
+
+      <h1>CONTACTO Y OTROS</h1>
+      <hr>
+
+      <h4>ID de usuario: </h4> <p> {{ this.usuario.id }} </p> <br>
+      <h4>Tipo de usuario: </h4> <p> {{ this.usuario.tipo }} </p> <br>
+      <h4>Correo electronico: </h4> <p> {{ this.usuario.correo }} </p> <br>
+      <h4>Nro de contacto: </h4> <p> {{ this.usuario.perfil.nro_contacto }} </p> <br>
+      <h4>Ciudad de Residencia: </h4> <p> {{ this.usuario.perfil.residencia }} </p> <br>
+      <h4>Nacionalidad: </h4> <p> {{ this.usuario.perfil.nacionalidad }} </p> <br>
+
+    </div>
+
+  </div>
+
+  <div class="row footer-profile">
+    <div class="col-12"></div>
+  </div>
+</div>

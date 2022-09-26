@@ -372,7 +372,7 @@
                 </h2>
               </div>
               <div class="col-2 mt-2">
-                <button class="btn btn-pago" (click)="openPago()" type="button">Generar Pago</button>
+                <button class="btn btn-pago" (click)="openPago()" type="button" [disabled]="this.valor_deuda == 0">Generar Pago</button>
               </div>
             </div>
             <div class="row">
@@ -396,7 +396,7 @@
                   <ng-container matColumnDef="monto">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header
                       style="background-color: white !important; color: grey"> MONTO </th>
-                    <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+                    <td mat-cell *matCellDef="let element"> $ {{this.addPoint(element.monto)}} </td>
                   </ng-container>
 
                   <ng-container matColumnDef="fecha_pago" class="table-head-producto">

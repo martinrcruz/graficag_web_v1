@@ -20,7 +20,6 @@ export class LayoutComponent implements OnInit {
     private router: Router,
     private auth: AuthService
   ) {
-    console.log(router.url)
     
   }
 
@@ -113,9 +112,7 @@ export class LayoutComponent implements OnInit {
         next: (res) => {
           // console.log(res)
           var data = Object.entries(res)
-          console.log(data)
           var userData = data[1][1][0]
-          console.log(userData)
           this.nombreUsuario = userData.nombre
         },
         error: (err) => {

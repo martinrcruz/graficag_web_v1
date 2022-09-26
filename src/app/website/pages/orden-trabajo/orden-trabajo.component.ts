@@ -59,6 +59,8 @@ export class OrdenTrabajoComponent implements OnInit {
     this.getOrdenTrabajo(null)
     this.getTipoImpuesto()
   }
+
+
   getOrdenTrabajo(filtroData: any | null) {
     this.ordenTrabajoService.getOrdenTrabajoTabla(filtroData)
       .subscribe({
@@ -72,6 +74,8 @@ export class OrdenTrabajoComponent implements OnInit {
           this.valor_neto = datos.total_neto
           this.valor_iva = datos.total_iva
           this.valor_total = datos.total
+
+          
 
           this.dataSource = new MatTableDataSource(datos);
           this.dataSource.paginator = this.paginator;

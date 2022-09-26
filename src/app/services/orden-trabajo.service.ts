@@ -48,6 +48,21 @@ export class OrdenTrabajoService {
 
 
 
+  updateEstadoProducto(formData: any){
+    return this.http.post(`${this.apiUrl}detalle_orden_trabajo/updateEstadoProducto`, formData);
+  }
+
+  updateEstadoServicio(formData: any){
+    return this.http.post(`${this.apiUrl}detalle_orden_trabajo/updateEstadoServicio`, formData);
+  }
+  
+
+
+  //Reporte functions
+  getReporteOrdenTrabajo(formData : any | null | ""){
+    return this.http.post(`${this.apiUrl}detalle_orden_trabajo/getReporteOrdenTrabajo` , formData);
+  }
+
   
 
   getDetalleOrdenTrabajo(id: any) {

@@ -68,7 +68,7 @@
               <label class="pago-label">MONTO</label><br>
               <mat-form-field class="full-width" appearance="fill">
                 <span matPrefix>$ &nbsp;</span>
-                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+                <input autocomplete="off" matInput  type="number" formControlName="monto" name="monto" id="monto">
               </mat-form-field>
               <br>
 
@@ -76,7 +76,7 @@
 
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Seleccionar</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="fecha_pago" name="fecha_pago">
+                <input autocomplete="off" matInput  [matDatepicker]="picker" formControlName="fecha_pago" name="fecha_pago">
                 <mat-hint>DD/MM/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -89,7 +89,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-6 offset-6">
-                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                    <button class="btn btn-info" style="color:white !important;" type="submit" [disabled]="this.valor_deuda ==0">GENERAR PAGO</button>
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@
               <label class="pago-label">MONTO</label><br>
               <mat-form-field class="full-width" appearance="fill">
                 <span matPrefix>$ &nbsp;</span>
-                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+                <input autocomplete="off" matInput  type="number" formControlName="monto" name="monto" id="monto">
               </mat-form-field>
               <br>
 
@@ -115,7 +115,7 @@
 
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Seleccionar</mat-label>
-                <input matInput [matDatepicker]="picker2" formControlName="fecha_pago" name="fecha_pago">
+                <input autocomplete="off" matInput  [matDatepicker]="picker2" formControlName="fecha_pago" name="fecha_pago">
                 <mat-hint>DD/MM/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
@@ -146,7 +146,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-6 offset-6">
-                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                    <button class="btn btn-info" style="color:white !important;" type="submit" [disabled]="this.valor_deuda ==0">GENERAR PAGO</button>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@
               <label class="pago-label">MONTO</label><br>
               <mat-form-field class="full-width" appearance="fill">
                 <span matPrefix>$ &nbsp;</span>
-                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+                <input autocomplete="off" matInput  type="number" formControlName="monto" name="monto" id="monto">
               </mat-form-field>
               <br>
 
@@ -169,7 +169,7 @@
 
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Seleccionar</mat-label>
-                <input matInput [matDatepicker]="picker3" formControlName="fecha_pago" name="fecha_pago">
+                <input autocomplete="off" matInput  [matDatepicker]="picker3" formControlName="fecha_pago" name="fecha_pago">
                 <mat-hint>DD/MM/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                 <mat-datepicker #picker3></mat-datepicker>
@@ -178,13 +178,13 @@
 
               <label class="pago-label">NUMERO DE ORDEN</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput type="number" formControlName="nro_orden" name="nro_orden" id="nro_orden">
+                <input autocomplete="off" matInput  type="number" formControlName="nro_orden" name="nro_orden" id="nro_orden">
               </mat-form-field>
               <br>
 
               <label class="pago-label">NOMBRE EMITIDO</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput formControlName="nombre_emitido" name="nombre_emitido" id="nombre_emitido">
+                <input autocomplete="off" matInput  formControlName="nombre_emitido" name="nombre_emitido" id="nombre_emitido">
               </mat-form-field>
 
               <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
@@ -193,7 +193,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-6 offset-6">
-                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                    <button class="btn btn-info" style="color:white !important;" type="submit" [disabled]="this.valor_deuda ==0">GENERAR PAGO</button>
                   </div>
                 </div>
               </div>
@@ -207,7 +207,7 @@
               <label class="pago-label">MONTO</label><br>
               <mat-form-field class="full-width" appearance="fill">
                 <span matPrefix>$ &nbsp;</span>
-                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+                <input autocomplete="off" matInput  type="number" formControlName="monto" name="monto" id="monto">
               </mat-form-field>
               <br>
 
@@ -215,7 +215,7 @@
 
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Seleccionar</mat-label>
-                <input matInput [matDatepicker]="picker4" formControlName="fecha_cobro" name="fecha_cobro">
+                <input autocomplete="off" matInput  [matDatepicker]="picker4" formControlName="fecha_cobro" name="fecha_cobro">
                 <mat-hint>DD/MM/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                 <mat-datepicker #picker4></mat-datepicker>
@@ -224,7 +224,7 @@
 
               <label class="pago-label">NUMERO DE CHEQUE</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput formControlName="nro_cheque" name="nro_cheque" id="nro_cheque">
+                <input autocomplete="off" matInput  formControlName="nro_cheque" name="nro_cheque" id="nro_cheque">
               </mat-form-field>
               <br>
 
@@ -251,7 +251,7 @@
 
               <label class="pago-label">NOMBRE TITULAR CHEQUE</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput formControlName="nombre_titular" name="nombre_titular" id="nombre_titular">
+                <input autocomplete="off" matInput  formControlName="nombre_titular" name="nombre_titular" id="nombre_titular">
               </mat-form-field>
 
               <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
@@ -260,7 +260,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-6 offset-6">
-                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                    <button class="btn btn-info" style="color:white !important;" type="submit" [disabled]="this.valor_deuda ==0">GENERAR PAGO</button>
                   </div>
                 </div>
               </div>
@@ -274,7 +274,7 @@
               <label class="pago-label">MONTO</label><br>
               <mat-form-field class="full-width" appearance="fill">
                 <span matPrefix>$ &nbsp;</span>
-                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+                <input autocomplete="off" matInput  type="number" formControlName="monto" name="monto" id="monto">
               </mat-form-field>
               <br>
 
@@ -282,7 +282,7 @@
 
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Seleccionar</mat-label>
-                <input matInput [matDatepicker]="picker5" formControlName="fecha_pago" name="fecha_pago">
+                <input autocomplete="off" matInput  [matDatepicker]="picker5" formControlName="fecha_pago" name="fecha_pago">
                 <mat-hint>DD/MM/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                 <mat-datepicker #picker5></mat-datepicker>
@@ -299,15 +299,36 @@
               </mat-form-field>
               <br>
 
+              <label class="pago-label">BANCO DE ORIGEN</label><br>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-select formControlName="banco_origen" name="banco_origen" id="banco_origen">
+                  <mat-option value="BANCO DE CHILE">BANCO DE CHILE</mat-option>
+                  <mat-option value="SCOTIABANK CHILE">SCOTIABANK CHILE</mat-option>
+                  <mat-option value="BANCO BCI">BANCO BCI</mat-option>
+                  <mat-option value="BANCO BICE">BANCO BICE</mat-option>
+                  <mat-option value="BANCO SANTANDER">BANCO SANTANDER</mat-option>
+                  <mat-option value="BANCO ITAU">BANCO ITAU</mat-option>
+                  <mat-option value="BANCO SECURITY">BANCO SECURITY</mat-option>
+                  <mat-option value="BANCO FALABELLA">BANCO FALABELLA</mat-option>
+                  <mat-option value="BANCO RIPLEY">BANCO RIPLEY</mat-option>
+                  <mat-option value="BANCO CONSORCIO">BANCO CONSORCIO</mat-option>
+                  <mat-option value="BANCO ESTADO">BANCO ESTADO</mat-option>
+
+                </mat-select>
+
+
+              </mat-form-field>
+              <br>
+
               <label class="pago-label">NUMERO DE OPERACION</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput formControlName="nro_operacion" name="nro_operacion" id="nro_operacion">
+                <input autocomplete="off" matInput  formControlName="nro_operacion" name="nro_operacion" id="nro_operacion">
               </mat-form-field>
               <br>
 
               <label class="pago-label">CODIGO AUTORIZACION</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput formControlName="codigo_autorizacion" name="codigo_autorizacion" id="codigo_autorizacion">
+                <input autocomplete="off" matInput  formControlName="codigo_autorizacion" name="codigo_autorizacion" id="codigo_autorizacion">
               </mat-form-field>
 
               <strong>N. TRABAJADOR : </strong> {{this.usuario.nombre}}<br>
@@ -316,7 +337,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-6 offset-6">
-                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                    <button class="btn btn-info" style="color:white !important;" type="submit" [disabled]="this.valor_deuda ==0">GENERAR PAGO</button>
                   </div>
                 </div>
               </div>
@@ -331,13 +352,13 @@
               <label class="pago-label">MONTO</label><br>
               <mat-form-field class="full-width" appearance="fill">
                 <span matPrefix>$ &nbsp;</span>
-                <input matInput type="number" formControlName="monto" name="monto" id="monto">
+                <input autocomplete="off" matInput  type="number" formControlName="monto" name="monto" id="monto">
               </mat-form-field>
               <br>
 
               <label class="pago-label">OTROS</label><br>
               <mat-form-field class="full-width" appearance="fill">
-                <input matInput formControlName="otros" name="otros" id="otros">
+                <input autocomplete="off" matInput  formControlName="otros" name="otros" id="otros">
               </mat-form-field>
 
               <br>
@@ -347,7 +368,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-6 offset-6">
-                    <button class="btn btn-info" style="color:white !important;" type="submit">GENERAR PAGO</button>
+                    <button class="btn btn-info" style="color:white !important;" type="submit" [disabled]="this.valor_deuda ==0">GENERAR PAGO</button>
                   </div>
                 </div>
               </div>

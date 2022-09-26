@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost/graficag_v1/graficag_sistema/'
+  apiUrl: 'http://localhost:8089/graficag_v1/graficag_sistema/'
 };
 
 /*
